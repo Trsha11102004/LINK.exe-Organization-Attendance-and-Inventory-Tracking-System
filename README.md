@@ -1,3 +1,5 @@
+![Banner](https://imgur.com/a/ur7SsAX)
+
 # 📋 LINK.exe Attendance and Inventory Tracker
 
 ## 🧩 About LINK.exe
