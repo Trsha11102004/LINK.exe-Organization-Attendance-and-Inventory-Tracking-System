@@ -39,7 +39,8 @@ This system ensures that duties are properly recorded and that equipment is acco
 
 ## 👩‍💻 Developers
 - **Juliana Paula Binas**  
-- [Add other team members here]  
+- **Trisha Mae Lombendencio**
+- **Angelika Jean Ocana**  
 
 ---
 
