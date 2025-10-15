@@ -1,9 +1,22 @@
-![Banner](https://i.imgur.com/iAxdK2e.jpeg)
-# 📋 LINK.exe Attendance and Inventory Tracker
+<html>
+ <head>
+  <title>LINK.exe Attendance and Inventory Tracking System</title>
+ </head>
+ 
+ <body>
+  <div>
+   <!-- ![Banner](https://i.imgur.com/iAxdK2e.jpeg) -->
+   <h1><b>📋 LINK.exe Attendance and Inventory Tracker</b></h1>
+  </div>
+    
+  <div class="about">
+   <h2><b>🧩 About LINK.exe</b></h2>
+   <p><b>LINK.exe</b> is a special interest group within the <b>College of Information, Communications, and Technology (CICT)</b> of <b>West Visayas State University</b>.  
+It provides a platform for CICT students to explore and apply ICT in diverse fields.</p>
+  </div>
+ </body>
+</html>
 
-## 🧩 About LINK.exe
-**LINK.exe** is a special interest group within the **College of Information, Communications, and Technology (CICT)** of **West Visayas State University**.  
-It provides a platform for CICT students to explore and apply ICT in diverse fields.  
 
 Through various events and initiatives, the organization promotes **multidisciplinary collaboration, creativity, and skill development** among CICTzens.  
 
