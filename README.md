@@ -31,10 +31,15 @@ This system ensures that duties are properly recorded and that equipment is acco
 ---
 
 ## 🖥️ How to Use
-1. Log in as **Admin**.  
-2. Go to the **Attendance** section to record member presence during duties or events.  
-3. Go to the **Inventory** section to add, update, or track multimedia equipment.  
-4. View or generate simple reports for documentation and accountability.  
+1. **Log in as Admin**.
+ Sign in with administrator credentials to access management features (Attendance, Inventory, Reports). Non-admin users have restricted access.
+2. **Record Attendance**
+   Navigate to the **Attendance** section to record member presence during duties, trainings, or events. Each record includes details such as **Name, Program, Year & Section, and Address** to track member participation and engagement.
+3. **Manage Inventory** 
+   Go to the Inventory section to add, update, or monitor multimedia equipment owned by LINK.exe. When an item is borrowed, the system captures important information such as the borrower’s name, program, and borrow/return dates for accountability.
+4. **Generate Simple Reports**
+   Access the **Reports** feature to view or produce summaries of attendance records and equipment usage. These reports serve as tools for **documentation, transparency, and performance tracking** within the organization.
+   
 
 ---
 
