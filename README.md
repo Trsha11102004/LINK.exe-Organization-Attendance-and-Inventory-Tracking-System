@@ -60,7 +60,7 @@
    <p>
     <h2><b>👩‍💻 Developers</b></h2>
  <p align="center">
-  <img src="https://i.imgur.com/aymHhIm.jpeg" alt="AITS Banner" style="width:100%; max-width:1200px; height:220px; object-fit:cover;">
+  <img src="https://i.imgur.com/aymHhIm.jpeg" alt="AITS Banner" style="width:70%; max-width:1000px; height:420px; object-fit:cover;">
 </p>
     <ul>
      <li><b><i>Juliana Paula Binas</i></b></li>
