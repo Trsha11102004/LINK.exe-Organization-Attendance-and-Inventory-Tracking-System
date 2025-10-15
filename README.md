@@ -5,7 +5,7 @@
  
  <body>
   <div>
-   <!-- ![Banner](https://i.imgur.com/iAxdK2e.jpeg) -->
+   ![Banner](https://i.imgur.com/iAxdK2e.jpeg)
    <h1><b>📋 LINK.exe Attendance and Inventory Tracker</b></h1>
   </div>
     
@@ -57,7 +57,7 @@
   <div class="developers">
    <p>
     <h2><b>👩‍💻 Developers</b></h2>
-   <!--![Banner](https://i.imgur.com/aymHhIm.jpeg)-->
+   ![Banner](https://i.imgur.com/aymHhIm.jpeg)
     <ul>
      <li><b><i>Juliana Paula Binas</i></b></li>
      <li><b><i>Trisha Mae Lombendencio</i></b></li>
