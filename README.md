@@ -5,7 +5,9 @@
  
  <body>
   <div>
-   ![Banner](https://i.imgur.com/iAxdK2e.jpeg)
+<p align="center">
+  <img src="https://i.imgur.com/iAxdK2e.jpeg" alt="AITS Banner" style="width:100%; max-width:1200px; height:200px; object-fit:cover;">
+</p>
    <h1><b>📋 LINK.exe Attendance and Inventory Tracker</b></h1>
   </div>
     
@@ -57,7 +59,9 @@
   <div class="developers">
    <p>
     <h2><b>👩‍💻 Developers</b></h2>
-   ![Banner](https://i.imgur.com/aymHhIm.jpeg)
+ <p align="center">
+  <img src="https://i.imgur.com/aymHhIm.jpeg" alt="AITS Banner" style="width:100%; max-width:1200px; height:220px; object-fit:cover;">
+</p>
     <ul>
      <li><b><i>Juliana Paula Binas</i></b></li>
      <li><b><i>Trisha Mae Lombendencio</i></b></li>
