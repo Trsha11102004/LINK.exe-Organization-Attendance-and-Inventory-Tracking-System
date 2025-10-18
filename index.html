@@ -3,12 +3,332 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin Dashboard - LINK.exe</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    <link rel="stylesheet" href="style.css">
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #112653 0%, #3b84be 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2em;
+        }
+
+        .org-name {
+            color: #764ba2;
+            font-size: 0.9em;
+            font-weight: 500;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+
+        .stat-card h3 {
+            color: #666;
+            font-size: 0.9em;
+            font-weight: 500;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .stat-card.members .stat-number { color: #667eea; }
+        .stat-card.present .stat-number { color: #10b981; }
+        .stat-card.absent .stat-number { color: #ef4444; }
+        .stat-card.equipment .stat-number { color: #f59e0b; }
+        .stat-card.borrowed .stat-number { color: #8b5cf6; }
+
+        .quick-links {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .quick-links h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .link-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .link-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .activity-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+        }
+
+        .activity-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .activity-card h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .activity-list {
+            list-style: none;
+        }
+
+        .activity-item {
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            transition: background 0.2s ease;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-item:hover {
+            background: #f9fafb;
+        }
+
+        .activity-time {
+            color: #999;
+            font-size: 0.85em;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .activity-text {
+            color: #333;
+            font-size: 0.95em;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-left: 5px;
+        }
+
+        .status-present { background: #d1fae5; color: #065f46; }
+        .status-absent { background: #fee2e2; color: #991b1b; }
+        .status-borrowed { background: #ddd6fe; color: #5b21b6; }
+        .status-returned { background: #dbeafe; color: #1e40af; }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+
+            .activity-section {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Title:</h1>
-    <h2>Description</h2>
+    <div class="container">
+        <header>
+            <div>
+                <h1>Admin Dashboard</h1>
+                <div class="org-name">LINK.exe - Tres Marias</div>
+            </div>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card members">
+                <h3>Total Members</h3>
+                <div class="stat-number">45</div>
+            </div>
+
+            <div class="stat-card present">
+                <h3>Present Today</h3>
+                <div class="stat-number">38</div>
+            </div>
+
+            <div class="stat-card absent">
+                <h3>Absent Members</h3>
+                <div class="stat-number">7</div>
+            </div>
+
+            <div class="stat-card equipment">
+                <h3>Total Equipment Items</h3>
+                <div class="stat-number">82</div>
+            </div>
+
+            <div class="stat-card borrowed">
+                <h3>Borrowed Equipment</h3>
+                <div class="stat-number">15</div>
+            </div>
+        </div>
+
+        <div class="quick-links">
+            <h2>Quick Links</h2>
+            <div class="links-grid">
+                <a href="#" class="link-btn">📋 Manage Attendance</a>
+                <a href="#" class="link-btn">🛠️ Manage Equipment</a>
+                <a href="#" class="link-btn">📊 View Reports</a>
+            </div>
+        </div>
+
+        <div class="activity-section">
+            <div class="activity-card">
+                <h2>📌 Latest Attendance Logs</h2>
+                <ul class="activity-list">
+                    <li class="activity-item">
+                        <span class="activity-time">2 minutes ago</span>
+                        <span class="activity-text">Maria Santos marked as <span class="status-badge status-present">Present</span></span>
+                    </li>
+                    <li class="activity-item">
+                        <span class="activity-time">15 minutes ago</span>
+                        <span class="activity-text">Juan Dela Cruz marked as <span class="status-badge status-present">Present</span></span>
+                    </li>
+                    <li class="activity-item">
+                        <span class="activity-time">32 minutes ago</span>
+                        <span class="activity-text">Anna Reyes marked as <span class="status-badge status-absent">Absent</span></span>
+                    </li>
+                    <li class="activity-item">
+                        <span class="activity-time">1 hour ago</span>
+                        <span class="activity-text">Carlos Martinez marked as <span class="status-badge status-present">Present</span></span>
+                    </li>
+                    <li class="activity-item">
+                        <span class="activity-time">1 hour ago</span>
+                        <span class="activity-text">Sofia Garcia marked as <span class="status-badge status-present">Present</span></span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="activity-card">
+                <h2>🔧 Recent Equipment Transactions</h2>
+                <ul class="activity-list">
+                    <li class="activity-item">
+                        <span class="activity-time">10 minutes ago</span>
+                        <span class="activity-text">Laptop #12 <span class="status-badge status-borrowed">Borrowed</span> by John Doe</span>
+                    </li>
+                    <li class="activity-item">
+                        <span class="activity-time">25 minutes ago</span>
+                        <span class="activity-text">Projector #03 <span class="status-badge status-returned">Returned</span> by Lisa Chen</span>
+                    </li>
+                    <li class="activity-item">
+                        <span class="activity-time">45 minutes ago</span>
+                        <span class="activity-text">Camera #05 <span class="status-badge status-borrowed">Borrowed</span> by Mike Johnson</span>
+                    </li>
+                    <li class="activity-item">
+                        <span class="activity-time">1 hour ago</span>
+                        <span class="activity-text">Microphone Set <span class="status-badge status-returned">Returned</span> by Sarah Lee</span>
+                    </li>
+                    <li class="activity-item">
+                        <span class="activity-time">2 hours ago</span>
+                        <span class="activity-text">Extension Cord #08 <span class="status-badge status-borrowed">Borrowed</span> by Tom Wilson</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simulate real-time updates
+        const stats = {
+            members: 45,
+            present: 38,
+            absent: 7,
+            equipment: 82,
+            borrowed: 15
+        };
+
+        // Update timestamp dynamically
+        function updateTimestamps() {
+            const items = document.querySelectorAll('.activity-time');
+            items.forEach((item, index) => {
+                const minutes = [2, 15, 32, 60, 60, 10, 25, 45, 60, 120];
+                if (minutes[index] < 60) {
+                    item.textContent = `${minutes[index]} minutes ago`;
+                } else {
+                    item.textContent = `${Math.floor(minutes[index] / 60)} hour${Math.floor(minutes[index] / 60) > 1 ? 's' : ''} ago`;
+                }
+            });
+        }
+
+        updateTimestamps();
+    </script>
 </body>
 </html>
