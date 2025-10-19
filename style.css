@@ -28,6 +28,16 @@
             align-items: center;
         }
 
+        .nav-bar {
+            background: #03508c;
+            padding: 30px;
+            border-radius: 15px;
+        }
+
+        .nav-bar .a:hover {
+            background: #4cbbde;
+        }
+
         h1 {
             color: #667eea;
             font-size: 2em;
