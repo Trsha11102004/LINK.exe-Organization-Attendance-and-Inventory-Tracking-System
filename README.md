@@ -1,7 +1,7 @@
 ![Banner](https://i.imgur.com/iAxdK2e.jpeg)
-# 📋 LINK.exe Attendance and Inventory Tracker
+# LINK.exe Attendance and Inventory Tracker
 
-## 🧩 About LINK.exe
+## About LINK.exe
 **LINK.exe** is a special interest group within the **College of Information, Communications, and Technology (CICT)** of **West Visayas State University**.  
 It provides a platform for CICT students to explore and apply ICT in diverse fields.  
 
@@ -15,13 +15,13 @@ LINK.exe was recognized as one of the **Ten Accomplished Youth Organizations of 
 
 ---
 
-## 🎯 Purpose of the System
+## Purpose of the System
 The **LINK.exe Attendance and Inventory Tracker System** was created to help the organization **track member attendance** and **monitor multimedia equipment** efficiently.  
 This system ensures that duties are properly recorded and that equipment is accounted for, reducing loss and maintaining transparency.
 
 ---
 
-## ⚙️ Features
+## Features
 - Admin-only access  
 - Attendance recording for members  
 - Equipment list with item details  
@@ -30,7 +30,7 @@ This system ensures that duties are properly recorded and that equipment is acco
 
 ---
 
-## 🖥️ How to Use
+## How to Use
 1. **Log in as Admin**.
  Sign in with administrator credentials to access management features (Attendance, Inventory, Reports). Non-admin users have restricted access.
 2. **Record Attendance**
@@ -43,7 +43,7 @@ This system ensures that duties are properly recorded and that equipment is acco
 
 ---
 
-## 👩‍💻 Developers
+## Developers
 ![Banner](https://i.imgur.com/aymHhIm.jpeg)
 - **Juliana Paula Binas**  
 - **Trisha Mae Lombendencio**
@@ -51,6 +51,6 @@ This system ensures that duties are properly recorded and that equipment is acco
 
 ---
 
-## 💡 Why This Project Matters
+## Why This Project Matters
 As LINK.exe continues to support multimedia events and projects, this system helps officers manage attendance and equipment efficiently.  
 It embodies LINK.exe’s mission of **using ICT for productivity, collaboration, and innovation**.
