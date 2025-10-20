@@ -5,9 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - LINK.exe</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-    <div class="nav-bar">
+
+    <div class="container">
+        <header>
+            <div class="nav-bar">
         <a href="#home">Dashboard</a>
         <a href="#attendance">Attendance</a>
         <a href="#equipments">Equipments</a>
@@ -16,7 +20,7 @@
         <a href="#members">Members</a>
         <button type="submit">Logout</button>
         <!--or insert icon then make logout a text-->
-    </div>
+            </div>
 
     <div class="container">
         <!-- Header -->
@@ -40,7 +44,7 @@
         <div class="stats-grid">
             <div class="stat-card members">
                 <h3>Total Members</h3>
-                <div class="stat-number">72</div>
+                <div class="stat-number">45</div>
             </div>
 
             <div class="stat-card equipment">
@@ -53,7 +57,6 @@
                 <div class="stat-number">2</div>
             </div>
         </div>
-
 
 <div class="activity-section">
     <div class="activity-card">
@@ -112,6 +115,13 @@
                 </ul>
             </div>
         </div>
+
+        <div class="contact">
+            <footer>
+                <h1>SOCIAL</h1>
+                <i class="fa-brands fa-facebook"><a href="https://www.facebook.com/linkexeofficial"></a></i>
+            </footer>
+        </div>
     </div>
 </div>
 
@@ -120,8 +130,7 @@
         const stats = {
             members: 45,
             present: 38,
-            absent: 7,
-            equipment: 82,
+            equipment: 25,
             borrowed: 15
         };
 
