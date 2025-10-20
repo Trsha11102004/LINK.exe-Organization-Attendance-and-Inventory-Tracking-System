@@ -16,98 +16,60 @@
             margin: 0 auto;
         }
 
-
-        /* Nav bar button styles - match current design */
+        /* Navigation bar container */
         .nav-bar {
-            max-width: 1400px;
-            margin: 0 auto 20px;
             display: flex;
-            gap: 12px;
-            align-items: center;
-            justify-content: flex-end;
-            padding: 8px 20px;
+            justify-content: space-between;
+            position: fixed;
+            z-index: 1000;
+            background-color: #4cbbde;
+            top: 0;
+            left: 0;
+            right: 0;
+            gap: 16px;
         }
 
-        /* Base pill button for links + logout button */
-        .nav-bar a,
-        .nav-bar button {
+        /* Texts in Navigation Bar */
+        .nav-links a {
             -webkit-appearance: none;
             appearance: none;
-            background: linear-gradient(135deg, #DDEDF2 0%, #03508C 50%);
             color: #ffffff;
             padding: 10px 18px;
-            border-radius: 999px;
             text-decoration: none;
             font-weight: 600;
             font-size: 0.95em;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            display: inline-block;
             border: none;
             cursor: pointer;
-            box-shadow: 0 8px 20px rgba(3,80,140,0.12);
-            transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease, filter 0.18s ease;
+            text-align: center;
         }
 
-        /* Slightly different style for Logout to indicate action */
-        .nav-bar button {
-            background: linear-gradient(135deg, #ffb4a2 0%, #ff6b6b 60%);
-            box-shadow: 0 8px 24px rgba(255,80,80,0.12);
+        /* Logout */
+        .logout-btn {
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.95em;
+            padding: 10px 18px;
+            cursor: pointer;
         }
 
-        /* Optional outline style for secondary links */
-        .nav-bar a.outline {
-            background: #ffffff;
-            color: #03508C;
-            border: 1px solid rgba(3,80,140,0.08);
-            box-shadow: 0 6px 16px rgba(3,80,140,0.06);
+        .logout-btn i {
+            margin-right: 6px;
         }
 
-        /* Active / selected state */
-        .nav-bar a.active {
-            background: linear-gradient(135deg, #667eea 0%, #3b84be 100%);
+        /* Navigation Hover */
+        .nav-links a:hover {
+            background: #03508c;
             color: #fff;
-            box-shadow: 0 12px 30px rgba(51,77,115,0.16);
-            transform: translateY(-2px);
         }
 
-        /* Hover / focus */
-        .nav-bar a:hover,
-        .nav-bar a:focus {
-            background: linear-gradient(135deg, #dd17dd 0%, #c88deb 100%);
+        /* Logout hover */
+        .logout-btn:hover {
+            background: #03508c;
             color: #fff;
-            transform: translateY(-3px);
-            box-shadow: 0 14px 36px rgba(15,50,90,0.12);
-            filter: none;
-            outline: none;
         }
-
-        .nav-bar button:hover,
-        .nav-bar button:focus {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ffb4a2 100%);
-            color: #fff;
-            transform: translateY(-3px);
-            box-shadow: 0 14px 36px rgba(255,80,80,0.16);
-            filter: none;
-            outline: none;
-        }
-
-        /* Pressed state */
-        .nav-bar a:active,
-        .nav-bar button:active {
-            transform: translateY(-1px) scale(0.995);
-        }
-
-        /* Small icon area if you add icons inside links */
-        .nav-bar .icon {
-            width: 18px;
-            height: 18px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-
 
         header {
             background: white;
@@ -118,16 +80,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .nav-bar {
-            background: #03508c;
-            padding: 30px;
-            border-radius: 15px;
-        }
-
-        .nav-bar .a:hover {
-            background: #4cbbde;
         }
 
         h1 {
@@ -243,8 +195,8 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
-            
         }
+        
         .activity-header h2 {
             display: block;
             color: #03508C;
@@ -286,6 +238,93 @@
         .status-borrowed { background: #ddd6fe; color: #5b21b6; }
         .status-returned { background: #dbeafe; color: #1e40af; }
 
+        footer {
+            background-color: #ffffff;
+            border-top: 2px solid #ddd;
+            color: #000000;
+            padding: 50px 80px 30px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 60px;
+        }
+
+        footer h3 {
+            font-weight: 700;
+            color: #03508C;
+            margin-bottom: 12px;
+            text-align: left;
+        }
+
+        .about-container {
+            max-width: 260px;
+            margin: auto;
+            font-weight: 700;
+        }
+
+        .about-us p {
+            font-size: 15px;
+            line-height: 1.6;
+            font-weight: normal;
+        }
+        
+        .pillar-container {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .pillar p {
+            font-size: 15px;
+            margin: 6px 0;
+        }
+
+        .contact-container {
+            flex: 1;
+            min-width: 200px;
+            text-align: left;
+            margin-left: -60px;
+        }
+
+        .contact a {
+            display: inline-block;
+            margin-right: 10px;
+            background: #03508C;
+            color: #fff;
+            border-radius: 8px;
+            padding: 8px 10px;
+            font-size: 18px;
+        }
+
+        .about-container,
+        .pillar-container,
+        .contact-container {
+            flex: 0 0 30%;
+        }
+
+        #backToTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #03508C;
+            color: #ffffff;
+            border: none;
+            border-radius: 50%;
+            width: 45px;height: 45px;
+            font-size: 18px;
+            cursor: pointer;
+            display: none; 
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        #back-to-top:hover {
+            background-color: #023e6a;
+            transform: scale(1.1);
+        }
         
 /* Responsive adjustments */
 @media (max-width: 768px) {
@@ -296,8 +335,8 @@
         flex-wrap: wrap;
     }
 
-    .nav-bar a,
-    .nav-bar button {
+    .nav-links a,
+    .logout-btn {
         padding: 8px 12px;
         font-size: 0.85em;
     }
@@ -305,7 +344,7 @@
             .stats-grid {
                 grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             }
-
+ 
             .activity-section {
                 grid-template-columns: 1fr;
             }
@@ -314,3 +353,20 @@
                 font-size: 1.5em;
             }
         }
+
+/* Responsive layout of footer */
+@media (max-width: 768px) {
+  footer {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 30px;
+  }
+
+  .contact-container {
+    text-align: center;
+  }
+
+  .contact a {
+    margin: 0 8px;
+  }
+}
