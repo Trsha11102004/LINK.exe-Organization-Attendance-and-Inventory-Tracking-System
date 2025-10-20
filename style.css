@@ -1,5 +1,4 @@
-
-        * {
+* {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -7,7 +6,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #112653 0%, #3b84be 100%);
+            background: linear-gradient(135deg, #DDEDF2 0%, #3b84be 100%);
             min-height: 100vh;
             padding: 20px;
         }
@@ -16,6 +15,99 @@
             max-width: 1400px;
             margin: 0 auto;
         }
+
+
+        /* Nav bar button styles - match current design */
+        .nav-bar {
+            max-width: 1400px;
+            margin: 0 auto 20px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 8px 20px;
+        }
+
+        /* Base pill button for links + logout button */
+        .nav-bar a,
+        .nav-bar button {
+            -webkit-appearance: none;
+            appearance: none;
+            background: linear-gradient(135deg, #DDEDF2 0%, #03508C 50%);
+            color: #ffffff;
+            padding: 10px 18px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95em;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(3,80,140,0.12);
+            transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease, filter 0.18s ease;
+        }
+
+        /* Slightly different style for Logout to indicate action */
+        .nav-bar button {
+            background: linear-gradient(135deg, #ffb4a2 0%, #ff6b6b 60%);
+            box-shadow: 0 8px 24px rgba(255,80,80,0.12);
+        }
+
+        /* Optional outline style for secondary links */
+        .nav-bar a.outline {
+            background: #ffffff;
+            color: #03508C;
+            border: 1px solid rgba(3,80,140,0.08);
+            box-shadow: 0 6px 16px rgba(3,80,140,0.06);
+        }
+
+        /* Active / selected state */
+        .nav-bar a.active {
+            background: linear-gradient(135deg, #667eea 0%, #3b84be 100%);
+            color: #fff;
+            box-shadow: 0 12px 30px rgba(51,77,115,0.16);
+            transform: translateY(-2px);
+        }
+
+        /* Hover / focus */
+        .nav-bar a:hover,
+        .nav-bar a:focus {
+            background: linear-gradient(135deg, #dd17dd 0%, #c88deb 100%);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 14px 36px rgba(15,50,90,0.12);
+            filter: none;
+            outline: none;
+        }
+
+        .nav-bar button:hover,
+        .nav-bar button:focus {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffb4a2 100%);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 14px 36px rgba(255,80,80,0.16);
+            filter: none;
+            outline: none;
+        }
+
+        /* Pressed state */
+        .nav-bar a:active,
+        .nav-bar button:active {
+            transform: translateY(-1px) scale(0.995);
+        }
+
+        /* Small icon area if you add icons inside links */
+        .nav-bar .icon {
+            width: 18px;
+            height: 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
 
         header {
             background: white;
@@ -85,48 +177,12 @@
             margin-bottom: 5px;
         }
 
-        .stat-card.members .stat-number { color: #667eea; }
-        .stat-card.present .stat-number { color: #10b981; }
-        .stat-card.absent .stat-number { color: #ef4444; }
-        .stat-card.equipment .stat-number { color: #f59e0b; }
-        .stat-card.borrowed .stat-number { color: #8b5cf6; }
+        .stat-card.members .stat-number { color: #03508C; }
+        .stat-card.equipment .stat-number { color: #9FDCE0; }
+        .stat-card.borrowed .stat-number { color: #4CBBDE; }
 
-        .quick-links {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
 
-        .quick-links h2 {
-            color: #333;
-            margin-bottom: 20px;
-            font-size: 1.3em;
-        }
-
-        .links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-        }
-
-        .link-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-decoration: none;
-            text-align: center;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: block;
-        }
-
-        .link-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
-        }
+        /* Activity Section*/
 
         .activity-section {
             display: grid;
@@ -135,6 +191,9 @@
         }
 
         .activity-card {
+             color: #333;
+            margin-bottom: 20px;
+            font-size: 1.3em;
             background: white;
             padding: 25px;
             border-radius: 15px;
@@ -145,9 +204,6 @@
             color: #333;
             margin-bottom: 20px;
             font-size: 1.3em;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
         .activity-list {
@@ -156,6 +212,7 @@
 
         .activity-item {
             padding: 15px;
+            color: #03508C;
             border-bottom: 1px solid #f0f0f0;
             transition: background 0.2s ease;
         }
@@ -168,16 +225,51 @@
             background: #f9fafb;
         }
 
-        .activity-time {
-            color: #999;
-            font-size: 0.85em;
+        .activity-title {
+            color: #112653;
+            font-size: 0.9em;
+            font-weight: 700;
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
 
         .activity-text {
             color: #333;
-            font-size: 0.95em;
+            font-size: 0.7em;
+        }
+
+        .activity-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            
+        }
+        .activity-header h2 {
+            display: block;
+            color: #03508C;
+            font-size: 1.6em;
+            margin: 0;
+            
+        }
+
+        .view-more-btn {
+            background: linear-gradient(135deg, #DDEDF2 0%, #03508C 50%);
+            font-size: 0.8em;
+            color: white;
+            padding: 10px 60px;
+            border-radius: 50px;
+            text-decoration: none;
+            text-align: center;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .view-more-btn:hover {
+            background: #03508C;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
         }
 
         .status-badge {
@@ -194,7 +286,22 @@
         .status-borrowed { background: #ddd6fe; color: #5b21b6; }
         .status-returned { background: #dbeafe; color: #1e40af; }
 
-        @media (max-width: 768px) {
+        
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .nav-bar {
+        gap: 8px;
+        padding: 8px 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .nav-bar a,
+    .nav-bar button {
+        padding: 8px 12px;
+        font-size: 0.85em;
+    }
+
             .stats-grid {
                 grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             }
