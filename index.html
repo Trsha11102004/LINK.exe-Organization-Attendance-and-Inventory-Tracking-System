@@ -19,17 +19,24 @@
     </div>
 
     <div class="container">
-        <header>
-        <div class="hero-slideshow">
-        <div class="slide active">
-            <img src="downloads/LINK20.jpg" alt="LINK.exe 20 years">
-            <div class="slide-caption">
-            <h2>LINK.exe 20 YEARS</h2>
-            <p>Enriching minds • Upholding excellence • Serving the community</p>
-            </div>
-        </div>
-        </div>
-        </header>
+        <!-- Header -->
+        <header class="hero-slider">
+  <div class="slides">
+    <div class="slide active" style="background-image:url('https://i.imgur.com/vyZfAFn.jpeg')"></div>
+    <div class="slide" style="background-image:url('https://i.imgur.com/h1pQhSh.jpeg')"></div>
+    <div class="slide" style="background-image:url('https://i.imgur.com/q338w8F.jpeg')"></div>
+  </div>
+
+  <div class="hero-text">
+      <h1>LINK.exe turns 20 years old</h1>
+      <p>Upholding excellence, serving the community</p>
+  </div>
+
+  <button class="nav prev">&#10094;</button>
+  <button class="nav next">&#10095;</button>
+
+  <div class="dots"></div>
+</header>
         <div class="stats-grid">
             <div class="stat-card members">
                 <h3>Total Members</h3>
@@ -133,5 +140,36 @@
 
         updateTimestamps();
     </script>
+            <script>
+        const slides = document.querySelectorAll(".slide");
+        const dotsContainer = document.querySelector(".dots");
+        let index = 0;
+
+        // Create dots
+        slides.forEach((_, i)=>{
+        const dot=document.createElement("span");
+        if(i===0) dot.classList.add("active");
+        dot.addEventListener("click", ()=>goToSlide(i));
+        dotsContainer.appendChild(dot);
+        });
+        const dots = document.querySelectorAll(".dots span");
+
+        function showSlide(i){
+        slides.forEach(s=>s.classList.remove("active"));
+        dots.forEach(d=>d.classList.remove("active"));
+        slides[i].classList.add("active");
+        dots[i].classList.add("active");
+        }
+
+        function next(){ index=(index+1)%slides.length; showSlide(index); }
+        function prev(){ index=(index-1+slides.length)%slides.length; showSlide(index); }
+        function goToSlide(i){ index=i; showSlide(i); }
+
+        document.querySelector(".next").onclick=next;
+        document.querySelector(".prev").onclick=prev;
+
+        // Auto slide
+        setInterval(next, 5000);
+        </script>
 </body>
 </html>
