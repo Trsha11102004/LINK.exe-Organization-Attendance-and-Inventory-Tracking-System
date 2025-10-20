@@ -58,7 +58,7 @@
         /* Optional outline style for secondary links */
         .nav-bar a.outline {
             background: #ffffff;
-            color: #ffffff;
+            color: #03508C;
             border: 1px solid rgba(3,80,140,0.08);
             box-shadow: 0 6px 16px rgba(3,80,140,0.06);
         }
@@ -151,8 +151,18 @@
         left:30px;
         z-index:5;
         }
-        .hero-text h1{ margin:0; font-size:1.8rem; font-weight:700; }
-        .hero-text p{ margin:3px 0 0; font-size:.9rem; opacity:.9; }
+        .hero-text h1{ 
+            color:white; 
+            margin:0; 
+            font-size:1.8rem; 
+            font-weight:700; 
+        }
+        
+        .hero-text p{ 
+            margin:3px 0 0; 
+            font-size:.9rem; 
+            opacity:.9; 
+        }
 
         /* Arrows */
         .nav{
