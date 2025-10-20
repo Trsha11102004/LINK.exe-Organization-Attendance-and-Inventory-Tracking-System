@@ -16,6 +16,99 @@
             margin: 0 auto;
         }
 
+
+        /* Nav bar button styles - match current design */
+        .nav-bar {
+            max-width: 1400px;
+            margin: 0 auto 20px;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 8px 20px;
+        }
+
+        /* Base pill button for links + logout button */
+        .nav-bar a,
+        .nav-bar button {
+            -webkit-appearance: none;
+            appearance: none;
+            background: linear-gradient(135deg, #DDEDF2 0%, #03508C 50%);
+            color: #ffffff;
+            padding: 10px 18px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95em;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(3,80,140,0.12);
+            transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease, filter 0.18s ease;
+        }
+
+        /* Slightly different style for Logout to indicate action */
+        .nav-bar button {
+            background: linear-gradient(135deg, #ffb4a2 0%, #ff6b6b 60%);
+            box-shadow: 0 8px 24px rgba(255,80,80,0.12);
+        }
+
+        /* Optional outline style for secondary links */
+        .nav-bar a.outline {
+            background: #ffffff;
+            color: #03508C;
+            border: 1px solid rgba(3,80,140,0.08);
+            box-shadow: 0 6px 16px rgba(3,80,140,0.06);
+        }
+
+        /* Active / selected state */
+        .nav-bar a.active {
+            background: linear-gradient(135deg, #667eea 0%, #3b84be 100%);
+            color: #fff;
+            box-shadow: 0 12px 30px rgba(51,77,115,0.16);
+            transform: translateY(-2px);
+        }
+
+        /* Hover / focus */
+        .nav-bar a:hover,
+        .nav-bar a:focus {
+            background: linear-gradient(135deg, #dd17dd 0%, #c88deb 100%);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 14px 36px rgba(15,50,90,0.12);
+            filter: none;
+            outline: none;
+        }
+
+        .nav-bar button:hover,
+        .nav-bar button:focus {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ffb4a2 100%);
+            color: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 14px 36px rgba(255,80,80,0.16);
+            filter: none;
+            outline: none;
+        }
+
+        /* Pressed state */
+        .nav-bar a:active,
+        .nav-bar button:active {
+            transform: translateY(-1px) scale(0.995);
+        }
+
+        /* Small icon area if you add icons inside links */
+        .nav-bar .icon {
+            width: 18px;
+            height: 18px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+
         header {
             background: white;
             padding: 25px 30px;
@@ -183,96 +276,7 @@
         .status-borrowed { background: #ddd6fe; color: #5b21b6; }
         .status-returned { background: #dbeafe; color: #1e40af; }
 
-        /* Nav bar button styles - match current design */
-.nav-bar {
-    max-width: 1400px;
-    margin: 0 auto 20px;
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 8px 20px;
-}
-
-/* Base pill button for links + logout button */
-.nav-bar a,
-.nav-bar button {
-    -webkit-appearance: none;
-    appearance: none;
-    background: linear-gradient(135deg, #DDEDF2 0%, #03508C 50%);
-    color: #ffffff;
-    padding: 10px 18px;
-    border-radius: 999px;
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 0.95em;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 8px 20px rgba(3,80,140,0.12);
-    transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease, filter 0.18s ease;
-}
-
-/* Slightly different style for Logout to indicate action */
-.nav-bar button {
-    background: linear-gradient(135deg, #ffb4a2 0%, #ff6b6b 60%);
-    box-shadow: 0 8px 24px rgba(255,80,80,0.12);
-}
-
-/* Optional outline style for secondary links */
-.nav-bar a.outline {
-    background: #ffffff;
-    color: #03508C;
-    border: 1px solid rgba(3,80,140,0.08);
-    box-shadow: 0 6px 16px rgba(3,80,140,0.06);
-}
-
-/* Active / selected state */
-.nav-bar a.active {
-    background: linear-gradient(135deg, #667eea 0%, #3b84be 100%);
-    color: #fff;
-    box-shadow: 0 12px 30px rgba(51,77,115,0.16);
-    transform: translateY(-2px);
-}
-
-/* Hover / focus */
-.nav-bar a:hover,
-.nav-bar a:focus {
-    background: linear-gradient(135deg, #dd17dd 0%, #c88deb 100%);
-    color: #fff;
-    transform: translateY(-3px);
-    box-shadow: 0 14px 36px rgba(15,50,90,0.12);
-    filter: none;
-    outline: none;
-}
-
-.nav-bar button:hover,
-.nav-bar button:focus {
-    background: linear-gradient(135deg, #ff6b6b 0%, #ffb4a2 100%);
-    color: #fff;
-    transform: translateY(-3px);
-    box-shadow: 0 14px 36px rgba(255,80,80,0.16);
-    filter: none;
-    outline: none;
-}
-
-/* Pressed state */
-.nav-bar a:active,
-.nav-bar button:active {
-    transform: translateY(-1px) scale(0.995);
-}
-
-/* Small icon area if you add icons inside links */
-.nav-bar .icon {
-    width: 18px;
-    height: 18px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
+        
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .nav-bar {
