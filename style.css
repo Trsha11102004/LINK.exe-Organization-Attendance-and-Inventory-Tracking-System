@@ -58,7 +58,7 @@
         /* Optional outline style for secondary links */
         .nav-bar a.outline {
             background: #ffffff;
-            color: #03508C;
+            color: #ffffff;
             border: 1px solid rgba(3,80,140,0.08);
             box-shadow: 0 6px 16px rgba(3,80,140,0.06);
         }
