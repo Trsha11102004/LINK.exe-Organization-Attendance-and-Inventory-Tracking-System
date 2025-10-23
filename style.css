@@ -340,7 +340,7 @@
 
         footer {
             background-color: #ffffff;
-            border-top: 2px solid #ddd;
+            border-radius: 12px;
             color: #000000;
             padding: 50px 80px 30px;
             display: flex;
@@ -348,6 +348,7 @@
             align-items: flex-start;
             flex-wrap: wrap;
             gap: 60px;
+
         }
 
         footer h3 {
