@@ -338,8 +338,40 @@
         .status-borrowed { background: #ddd6fe; color: #5b21b6; }
         .status-returned { background: #dbeafe; color: #1e40af; }
 
+      .aboutUs-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 50px 0; /* space above footer */
+}
+
+.aboutUsBtn {
+    background-color: #03508C;
+    color: #ffffff;
+    border: none;
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1.2;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.aboutUsBtn:hover {
+    background-color: #ddedf2;
+    color: #000;
+    transform: scale(1.08);
+}
+
         footer {
-            background-color: #ffffff;
+            background-color: #linear-gradient(135deg, #     ;                                                              0%, #3b84be 100%);
             border-radius: 12px;
             color: #000000;
             padding: 50px 80px 30px;
@@ -401,6 +433,191 @@
         .pillar-container,
         .contact-container {
             flex: 0 0 30%;
+        }
+
+        /*About Us and Four Pillars*/
+        .about-link {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 60px;
+  background: ;
+  font-family: Arial, sans-serif;
+  gap: 40px;
+}
+
+.left-box h2 {
+font-size: 32px;
+margin-bottom: 10px;
+color: #03508C;
+}
+
+.left-box p {
+    font-size: 15px;
+    line-height: 1.6;
+    font-weight: normal;
+}
+
+.pillars-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: px;
+}
+
+.pillar-card {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.pillar-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.3s;
+  filter: grayscale(100%);
+}
+
+.pillar-card:hover img {
+  filter: grayscale(0%);
+  transform: scale(1.05);
+}
+
+.pillar-card .overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 90%;
+  height: 90%;
+  transform: translate(-50%, -50%);   /* centers it */
+  background: rgba(159, 220, 224, 0.85);
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  
+  opacity: 0;
+  transition: 0.3s;
+  color: #000;
+  text-align: center;
+}
+
+.pillar-card.active .overlay,
+.pillar-card:hover .overlay {
+    opacity: 1;
+}
+
+.pillar-link {
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.pillar-link:hover {
+  color: #9FDCE0;         /* same theme color */
+  font-weight: 600;       /* makes it bold to show “active” */
+}
+
+.pillar-link.active {
+  color: #9FDCE0;
+  font-weight: 600;
+}
+
+.overlay h3 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.overlay p {
+  font-size: 12px;
+  opacity: 0.8;
+  margin-top: 5px;
+}
+
+        /*Team Members*/
+        .team-section {
+        background: ;
+        color: #000;
+        padding: 60px;
+        font-family: Arial, sans-serif;
+        }
+
+        .team-header h2 {
+        font-size: 32px;
+        margin-bottom: 10px;
+        }
+
+        .team-header h2 span {
+        color: #03508C; 
+        }
+
+        .team-header p {
+        font-size: 15px;
+        line-height: 1.6;
+        font-weight: normal;
+        }
+
+        .team-wrapper {
+        display: flex;
+        gap: 0px;
+        margin-top: 40px;
+        }
+
+        .team-card {
+        position: relative;
+        width: 270px;
+        height: 270px;
+        overflow: hidden;
+        cursor: pointer;
+        }
+
+        .team-card img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: grayscale(100%);
+        transition: 0.3s ease;
+        }
+
+        .team-card:hover img {
+        filter: grayscale(0%);
+        transform: scale(1.05);
+        }
+
+        .team-card .info {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 90%;
+            height: 90%;
+            transform: translate(-50%, -50%);   /* <-- this centers it */
+            background: rgba(159, 220, 224, 0.8);
+            
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+
+            opacity: 0;
+            transition: 0.3s ease;
+            color: #000;
+        }
+
+        .team-card:hover .info {
+        opacity: 1;
+        }
+
+        .info h3 {
+        font-size: 18px;
+        margin: 0;
+        }
+
+        .info p {
+        font-size: 12px;
+        opacity: 0.9;
+        margin-top: 5px;
         }
 
         #backToTop {
