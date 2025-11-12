@@ -129,7 +129,7 @@
 </div>
 </div>
 <div class="aboutUs-wrapper">
-    <button id="aboutUsBtn" class="aboutUsBtn">About Us</button>
+    <button id="aboutUsBtn" class="aboutUsBtn">Learn More About Us</button>
 </div>
             <footer>
                 <section class="about-link">
@@ -215,21 +215,44 @@
                         </div>
                     </div>
                 </section>
-                <div class="contact-container">
-                    <div class="contact">
-                        <h3>SOCIAL</h3>
-                        <a href="https://www.facebook.com/linkexeofficial" target="_blank"><i class="fa-brands fa-facebook"></i></a>
-                        <a href="mailto:link.exe@wvsu.edu.ph" target="_blank"><i class="fa-solid fa-envelope"></i></a>
-                        <a href="tiktok.com/@linkexeofficial" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
-                    </div>
-                </div>
-            </footer>
+<div class="contact">
+    <div class="social-grid">
+        <div class="social-card">
+            <div class="icon-circle"><i class="fa-brands fa-facebook-f"></i></div>
+            <h4>Facebook</h4>
+            <a href="https://www.facebook.com/linkexeofficial" target="_blank">Visit Page</a>
+        </div>
+
+        <div class="social-card">
+            <div class="icon-circle"><i class="fa-solid fa-envelope"></i></div>
+            <h4>Email</h4>
+            <a href="mailto:link.exe@wvsu.edu.ph" target="_blank">Send Message</a>
+        </div>
+
+        <div class="social-card">
+            <div class="icon-circle"><i class="fa-brands fa-tiktok"></i></div>
+            <h4>TikTok</h4>
+            <a href="https://tiktok.com/@linkexeofficial" target="_blank">Watch Content</a>
+        </div>
+    </div>
+</div>
 
             <button id="backToTop">
                 <i class="fa-solid fa-angles-up"></i>
             </button>
     </div>
+    <script>
+    document.addEventListener("scroll", function () {
+        const footer = document.querySelector("footer");
+        const rect = footer.getBoundingClientRect();
 
+        if (rect.top < window.innerHeight) {
+            footer.style.background = "rgba(255, 255, 255, 0.85)"; // lighter solid bg
+        } else {
+            footer.style.background = "rgba(255, 255, 255, 0.2)"; // transparent
+        }
+    });
+    </script>
     <script>
         // Simulate real-time updates
         const stats = {
