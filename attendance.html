@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #DDEDF2 0%, #3b84be 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Navigation Bar */
+        .nav-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: #03508C;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.95em;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+        }
+
+        /* Header */
+        header {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            margin-top: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            color: #03508C;
+            font-size: 2em;
+        }
+
+        .add-event-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            font-size: 1em;
+        }
+
+        .add-event-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Overall Attendance Table */
+        .activity-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .activity-card h2 {
+            color: #03508C;
+            margin-bottom: 20px;
+            font-size: 1.6em;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            overflow-y: auto;
+            max-height: 600px;
+            position: relative;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+        }
+
+        .table-wrapper::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        .table-wrapper::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 5px;
+        }
+
+        .table-wrapper::-webkit-scrollbar-thumb {
+            background: #03508C;
+            border-radius: 5px;
+        }
+
+        .table-wrapper::-webkit-scrollbar-thumb:hover {
+            background: #024070;
+        }
+
+        .table-wrapper::-webkit-scrollbar-corner {
+            background: #f1f1f1;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            min-width: 600px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #f0f0f0;
+            white-space: nowrap;
+            min-width: 150px;
+        }
+
+        th:first-child,
+        td:first-child {
+            position: sticky;
+            left: 0;
+            background: #f9fafb;
+            z-index: 11;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+            font-weight: 600;
+        }
+
+        td:first-child {
+            background: white;
+        }
+
+        tbody tr:hover td:first-child {
+            background: #f9fafb;
+        }
+
+        th {
+            background: #f9fafb;
+            color: #03508C;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        th:first-child {
+            z-index: 12;
+        }
+
+        td {
+            color: #333;
+        }
+
+        .td-center {
+            text-align: center;
+            font-size: 1.4em;
+            font-weight: bold;
+        }
+
+        .present {
+            color: #065f46;
+        }
+
+        .absent {
+            color: #991b1b;
+        }
+
+        tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        /* Event Containers */
+        .events-section {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .events-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .events-section h2 {
+            color: #03508C;
+            margin: 0;
+            font-size: 1.6em;
+        }
+
+        /* Filter Buttons */
+        .filter-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: #f0f4f8;
+            color: #03508C;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85em;
+        }
+
+        .filter-btn:hover {
+            background: #e0e7ef;
+            transform: translateY(-1px);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, #03508C 0%, #024070 100%);
+            color: white;
+            box-shadow: 0 2px 8px rgba(3, 80, 140, 0.3);
+        }
+
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .event-container {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .event-container:hover {
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .event-header {
+            padding: 20px;
+            cursor: pointer;
+            border-left: 5px solid #03508C;
+            transition: background 0.2s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .event-header:hover {
+            background: #f9fafb;
+        }
+
+        .event-header-content {
+            flex: 1;
+        }
+
+        .event-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .delete-event-btn {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9em;
+        }
+
+        .delete-event-btn:hover {
+            background: #b91c1c;
+            transform: scale(1.05);
+        }
+
+        .event-title {
+            color: #112653;
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .pillar-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            color: white;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 8px 0;
+        }
+
+        .event-date,
+        .event-info {
+            color: #666;
+            font-size: 0.9em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 6px;
+        }
+
+        .event-date i,
+        .event-info i {
+            color: #03508C;
+        }
+
+        /* Event Content (Initially Hidden) */
+        .event-content {
+            padding: 0 20px 20px 20px;
+            display: none;
+            animation: slideDown 0.3s ease;
+        }
+
+        .event-content.active {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Attendee List */
+        .attendee-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+
+        .attendee-item {
+            padding: 12px;
+            background: #f9fafb;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border-left: 3px solid #03508C;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .attendee-item:hover {
+            background: #f0f4f8;
+            transform: translateX(5px);
+        }
+
+        .attendee-info {
+            flex: 1;
+        }
+
+        .attendee-name {
+            font-weight: 600;
+            color: #112653;
+            margin-bottom: 4px;
+            font-size: 1em;
+        }
+
+        .attendee-details {
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        .delete-btn {
+            background: #dc2626;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            background: #b91c1c;
+        }
+
+        .add-attendee-btn {
+            background: #03508C;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+        }
+
+        .add-attendee-btn:hover {
+            background: #024070;
+            transform: translateY(-2px);
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            animation: slideDownModal 0.3s ease;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        @keyframes slideDownModal {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 15px 15px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .modal-header h2 {
+            font-size: 1.5em;
+            margin: 0;
+        }
+
+        .close {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close:hover {
+            transform: scale(1.2);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            cursor: pointer;
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .date-range {
+            display: none;
+        }
+
+        .date-range.active {
+            display: block;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .empty-state i {
+            font-size: 4em;
+            color: #ddd;
+            margin-bottom: 15px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-bar {
+                padding: 10px 15px;
+            }
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .events-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .event-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+
+            .table-wrapper {
+                overflow-x: scroll;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="nav-bar">
+        <button class="logout-btn" onclick="alert('Logout functionality')">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+    </nav>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>Attendance</h1>
+            <button class="add-event-btn" onclick="openAddEventModal()">
+                <i class="fas fa-plus"></i> Add Event
+            </button>
+        </header>
+
+        <!-- Overall Attendance Table -->
+        <div class="activity-card">
+            <h2>Overall Attendance Table</h2>
+            <div class="table-wrapper">
+                <table id="attendanceTable">
+                    <thead>
+                        <tr id="tableHeader">
+                            <th>Member Name</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Event Details Section -->
+        <div class="events-section">
+            <div class="events-header">
+                <h2>Event Details</h2>
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-pillar="all" onclick="filterEvents('all')">All</button>
+                    <button class="filter-btn" data-pillar="Extensions" onclick="filterEvents('Extensions')">Extensions</button>
+                    <button class="filter-btn" data-pillar="Training" onclick="filterEvents('Training')">Training</button>
+                    <button class="filter-btn" data-pillar="Programs" onclick="filterEvents('Programs')">Programs</button>
+                    <button class="filter-btn" data-pillar="IGP" onclick="filterEvents('IGP')">IGP</button>
+                </div>
+            </div>
+            <div class="event-grid" id="eventGrid">
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Event Modal -->
+    <div id="addEventModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add New Event</h2>
+                <span class="close" onclick="closeAddEventModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="addEventForm" onsubmit="addEvent(event)">
+                    <div class="form-group">
+                        <label for="eventName">Event Name *</label>
+                        <input type="text" id="eventName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="eventPillar">Pillar *</label>
+                        <select id="eventPillar" required>
+                            <option value="">Select Pillar</option>
+                            <option value="Extensions">Extensions</option>
+                            <option value="Training">Training</option>
+                            <option value="Programs">Programs</option>
+                            <option value="IGP">IGP</option>
+                        </select>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="multiDayEvent" onchange="toggleDateRange()">
+                        <label for="multiDayEvent">Multi-day Event</label>
+                    </div>
+
+                    <div id="singleDate">
+                        <div class="form-group">
+                            <label for="eventDate">Event Date *</label>
+                            <input type="date" id="eventDate" required>
+                        </div>
+                    </div>
+
+                    <div id="dateRange" class="date-range">
+                        <div class="form-group">
+                            <label for="eventStartDate">First Day *</label>
+                            <input type="date" id="eventStartDate">
+                        </div>
+                        <div class="form-group">
+                            <label for="eventEndDate">Last Day *</label>
+                            <input type="date" id="eventEndDate">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Create Event</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Attendee Modal -->
+    <div id="addAttendeeModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add Attendee</h2>
+                <span class="close" onclick="closeAddAttendeeModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="addAttendeeForm" onsubmit="addAttendee(event)">
+                    <div class="form-group">
+                        <label for="attendeeName">Name *</label>
+                        <input type="text" id="attendeeName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="attendeeRole">Role *</label>
+                        <input type="text" id="attendeeRole" placeholder="e.g., Volunteer, Organizer, Team Leader" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="dutyDate">Duty Date *</label>
+                        <input type="date" id="dutyDate" required>
+                    </div>
+                    <button type="submit" class="submit-btn">Add Attendee</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data storage
+        let events = [];
+        let currentEventId = null;
+        let currentFilter = 'all';
+
+        // Pillar colors
+        const pillarColors = {
+            'Extensions': '#03508C',
+            'Training': '#4CBBDE',
+            'Programs': '#9FDCE0',
+            'IGP': '#667eea'
+        };
+
+        // Initialize with sample data
+        function initializeSampleData() {
+            events = [
+                {
+                    id: 1,
+                    name: 'Hinampang 2025',
+                    pillar: 'Extensions',
+                    startDate: '2025-03-15',
+                    endDate: '2025-03-17',
+                    attendees: [
+                        { name: 'Bryan Santos', role: 'Team Leader', dutyDate: '2025-03-15' },
+                        { name: 'Kaye Francisco', role: 'Volunteer', dutyDate: '2025-03-16' },
+                        { name: 'Ana Reyes', role: 'Organizer', dutyDate: '2025-03-15' },
+                        { name: 'Carlos Mendoza', role: 'Volunteer', dutyDate: '2025-03-17' },
+                        { name: 'Maria Cruz', role: 'Coordinator', dutyDate: '2025-03-15' },
+                        { name: 'Lea Gonzales', role: 'Volunteer', dutyDate: '2025-03-16' }
+                    ]
+                },
+                {
+                    id: 2,
+                    name: 'Assembly 2024',
+                    pillar: 'Training',
+                    startDate: '2024-11-20',
+                    endDate: '2024-11-20',
+                    attendees: [
+                        { name: 'Bryan Santos', role: 'Speaker', dutyDate: '2024-11-20' },
+                        { name: 'Miguel Torres', role: 'Participant', dutyDate: '2024-11-20' },
+                        { name: 'Ana Reyes', role: 'Moderator', dutyDate: '2024-11-20' },
+                        { name: 'Maria Cruz', role: 'Organizer', dutyDate: '2024-11-20' },
+                        { name: 'Jose Villanueva', role: 'Participant', dutyDate: '2024-11-20' },
+                        { name: 'Lea Gonzales', role: 'Participant', dutyDate: '2024-11-20' }
+                    ]
+                },
+                {
+                    id: 3,
+                    name: 'Workshop Series',
+                    pillar: 'Programs',
+                    startDate: '2025-01-10',
+                    endDate: '2025-01-12',
+                    attendees: [
+                        { name: 'Kaye Francisco', role: 'Facilitator', dutyDate: '2025-01-10' },
+                        { name: 'Miguel Torres', role: 'Workshop Leader', dutyDate: '2025-01-11' },
+                        { name: 'Ana Reyes', role: 'Coordinator', dutyDate: '2025-01-10' },
+                        { name: 'Maria Cruz', role: 'Assistant', dutyDate: '2025-01-11' },
+                        { name: 'Jose Villanueva', role: 'Participant', dutyDate: '2025-01-12' }
+                    ]
+                },
+                {
+                    id: 4,
+                    name: 'IGP Summit',
+                    pillar: 'IGP',
+                    startDate: '2025-02-05',
+                    endDate: '2025-02-05',
+                    attendees: [
+                        { name: 'Bryan Santos', role: 'Representative', dutyDate: '2025-02-05' },
+                        { name: 'Kaye Francisco', role: 'Delegate', dutyDate: '2025-02-05' },
+                        { name: 'Miguel Torres', role: 'Participant', dutyDate: '2025-02-05' },
+                        { name: 'Carlos Mendoza', role: 'Volunteer', dutyDate: '2025-02-05' },
+                        { name: 'Maria Cruz', role: 'Coordinator', dutyDate: '2025-02-05' },
+                        { name: 'Lea Gonzales', role: 'Delegate', dutyDate: '2025-02-05' }
+                    ]
+                }
+            ];
+            renderAll();
+        }
+
+        // Get all unique members
+        function getAllMembers() {
+            const memberSet = new Set();
+            events.forEach(event => {
+                event.attendees.forEach(attendee => {
+                    memberSet.add(attendee.name);
+                });
+            });
+            return Array.from(memberSet).sort();
+        }
+
+        // Check if member attended event
+        function memberAttended(memberName, eventId) {
+            const event = events.find(e => e.id === eventId);
+            if (!event) return false;
+            return event.attendees.some(a => a.name === memberName);
+        }
+
+        // Render Overall Attendance Table
+        function renderAttendanceTable() {
+            const header = document.getElementById('tableHeader');
+            const body = document.getElementById('tableBody');
+
+            // Build header
+            let headerHTML = '<th>Member Name</th>';
+            events.forEach(event => {
+                headerHTML += `<th>${event.name}</th>`;
+            });
+            header.innerHTML = headerHTML;
+
+            // Build body
+            const members = getAllMembers();
+            if (members.length === 0) {
+                body.innerHTML = `
+                    <tr>
+                        <td colspan="${events.length + 1}" style="text-align: center; padding: 40px; color: #666;">
+                            <i class="fas fa-users" style="font-size: 3em; display: block; margin-bottom: 10px; color: #ddd;"></i>
+                            No members yet. Add events and attendees to get started.
+                        </td>
+                    </tr>
+                `;
+                return;
+            }
+
+            let bodyHTML = '';
+            members.forEach(member => {
+                bodyHTML += `<tr><td>${member}</td>`;
+                events.forEach(event => {
+                    const attended = memberAttended(member, event.id);
+                    bodyHTML += `
+                        <td class="td-center">
+                            <span class="${attended ? 'present' : 'absent'}">
+                                ${attended ? '✓' : '✗'}
+                            </span>
+                        </td>
+                    `;
+                });
+                bodyHTML += '</tr>';
+            });
+            body.innerHTML = bodyHTML;
+        }
+
+        // Filter events by pillar
+        function filterEvents(pillar) {
+            currentFilter = pillar;
+            
+            // Update active button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.getAttribute('data-pillar') === pillar) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            renderEventCards(pillar);
+        }
+
+        // Render Event Cards
+        function renderEventCards(filterPillar = 'all') {
+            const grid = document.getElementById('eventGrid');
+            
+            // Filter events based on selected pillar
+            const filteredEvents = filterPillar === 'all' 
+                ? events 
+                : events.filter(event => event.pillar === filterPillar);
+            
+            if (events.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1/-1;">
+                        <i class="fas fa-calendar-alt"></i>
+                        <p>No events yet. Click "Add Event" to create your first event.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            if (filteredEvents.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state" style="grid-column: 1/-1;">
+                        <i class="fas fa-filter"></i>
+                        <p>No events found for the selected pillar.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            grid.innerHTML = filteredEvents.map(event => `
+                <div class="event-container">
+                    <div class="event-header" style="border-left-color: ${pillarColors[event.pillar]};">
+                        <div class="event-header-content" onclick="toggleEvent(${event.id})">
+                            <div class="event-title">${event.name}</div>
+                            <span class="pillar-badge" style="background: ${pillarColors[event.pillar]}; ${event.pillar === 'Programs' ? 'color: #112653;' : ''}">${event.pillar}</span>
+                            <p class="event-date">
+                                <i class="fas fa-calendar"></i>
+                                ${formatDate(event.startDate)}${event.endDate !== event.startDate ? ' - ' + formatDate(event.endDate) : ''}
+                            </p>
+                            <p class="event-info">
+                                <i class="fas fa-users"></i> ${event.attendees.length} attendees
+                            </p>
+                        </div>
+                        <div class="event-actions">
+                            <button class="delete-event-btn" onclick="deleteEvent(${event.id}); event.stopPropagation();" title="Delete Event">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="event-content" id="event-${event.id}">
+                        ${event.attendees.length === 0 ? `
+                            <div class="empty-state">
+                                <p style="font-size: 0.9em;">No attendees yet.</p>
+                            </div>
+                        ` : `
+                            <ul class="attendee-list">
+                                ${event.attendees.map((attendee, index) => `
+                                    <li class="attendee-item">
+                                        <div class="attendee-info">
+                                            <div class="attendee-name">${attendee.name}</div>
+                                            <div class="attendee-details">
+                                                Duty Date: ${formatDate(attendee.dutyDate)} | Role: ${attendee.role}
+                                            </div>
+                                        </div>
+                                        <button class="delete-btn" onclick="deleteAttendee(${event.id}, ${index})">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </li>
+                                `).join('')}
+                            </ul>
+                        `}
+                        <button class="add-attendee-btn" onclick="openAddAttendeeModal(${event.id})">
+                            <i class="fas fa-plus"></i> Add Attendee
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Render all
+        function renderAll() {
+            renderAttendanceTable();
+            renderEventCards(currentFilter);
+        }
+
+        // Format date
+        function formatDate(dateStr) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateStr).toLocaleDateString('en-US', options);
+        }
+
+        // Toggle event expansion
+        function toggleEvent(eventId) {
+            const content = document.getElementById(`event-${eventId}`);
+            content.classList.toggle('active');
+        }
+
+        // Toggle date range
+        function toggleDateRange() {
+            const checkbox = document.getElementById('multiDayEvent');
+            const singleDate = document.getElementById('singleDate');
+            const dateRange = document.getElementById('dateRange');
+            
+            if (checkbox.checked) {
+                singleDate.style.display = 'none';
+                dateRange.classList.add('active');
+                document.getElementById('eventDate').removeAttribute('required');
+                document.getElementById('eventStartDate').setAttribute('required', 'required');
+                document.getElementById('eventEndDate').setAttribute('required', 'required');
+            } else {
+                singleDate.style.display = 'block';
+                dateRange.classList.remove('active');
+                document.getElementById('eventDate').setAttribute('required', 'required');
+                document.getElementById('eventStartDate').removeAttribute('required');
+                document.getElementById('eventEndDate').removeAttribute('required');
+            }
+        }
+
+        // Modal functions
+        function openAddEventModal() {
+            document.getElementById('addEventModal').style.display = 'block';
+        }
+
+        function closeAddEventModal() {
+            document.getElementById('addEventModal').style.display = 'none';
+            document.getElementById('addEventForm').reset();
+            document.getElementById('multiDayEvent').checked = false;
+            toggleDateRange();
+        }
+
+        function openAddAttendeeModal(eventId) {
+            currentEventId = eventId;
+            document.getElementById('addAttendeeModal').style.display = 'block';
+        }
+
+        function closeAddAttendeeModal() {
+            document.getElementById('addAttendeeModal').style.display = 'none';
+            document.getElementById('addAttendeeForm').reset();
+            currentEventId = null;
+        }
+
+        // Add event
+        function addEvent(e) {
+            e.preventDefault();
+            
+            const multiDay = document.getElementById('multiDayEvent').checked;
+            let startDate, endDate;
+            
+            if (multiDay) {
+                startDate = document.getElementById('eventStartDate').value;
+                endDate = document.getElementById('eventEndDate').value;
+            } else {
+                startDate = document.getElementById('eventDate').value;
+                endDate = startDate;
+            }
+
+            const newEvent = {
+                id: Date.now(),
+                name: document.getElementById('eventName').value,
+                pillar: document.getElementById('eventPillar').value,
+                startDate: startDate,
+                endDate: endDate,
+                attendees: []
+            };
+
+            events.push(newEvent);
+            renderAll();
+            closeAddEventModal();
+        }
+
+        // Add attendee
+        function addAttendee(e) {
+            e.preventDefault();
+            
+            const event = events.find(ev => ev.id === currentEventId);
+            if (!event) return;
+
+            const newAttendee = {
+                name: document.getElementById('attendeeName').value,
+                role: document.getElementById('attendeeRole').value,
+                dutyDate: document.getElementById('dutyDate').value
+            };
+
+            event.attendees.push(newAttendee);
+            renderAll();
+            closeAddAttendeeModal();
+        }
+
+        // Delete event
+        function deleteEvent(eventId) {
+            const event = events.find(e => e.id === eventId);
+            if (!event) return;
+            
+            if (confirm(`Are you sure you want to delete the event "${event.name}"? This will remove all attendees associated with this event.`)) {
+                events = events.filter(e => e.id !== eventId);
+                renderAll();
+            }
+        }
+
+        // Delete attendee
+        function deleteAttendee(eventId, attendeeIndex) {
+            if (confirm('Are you sure you want to remove this attendee?')) {
+                const event = events.find(e => e.id === eventId);
+                if (event) {
+                    event.attendees.splice(attendeeIndex, 1);
+                    renderAll();
+                }
+            }
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            if (event.target.classList.contains('modal')) {
+                event.target.style.display = 'none';
+            }
+        }
+
+        // Initialize
+        initializeSampleData();
+    </script>
+</body>
+</html>
