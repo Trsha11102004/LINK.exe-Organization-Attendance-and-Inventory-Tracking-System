@@ -17,6 +17,15 @@
             margin: 0 auto;
         }
 
+        /* Logo */
+        .logo {
+            width: 120px;
+            height: 120px;
+            background-image: url('Images/LINK.exe\ Logo_Secondary\ White.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+
         /* Navigation bar container */
         .nav-bar {
             display: flex;
