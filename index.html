@@ -9,7 +9,7 @@
 </head>
   
 <body>  
-     <div>
+<div>
     <nav class="nav-bar">
         <div class="nav-links">
           <div class=logo></div>
@@ -29,30 +29,49 @@
         </button>
     </nav>
 
-    <header class="hero-slider">
-  <div class="slides">
-    <div class="slide active" style="background-image:url('Images/LINK20.jpg')"></div>
-    <div class="slide" style="background-image:url('Images/TRAINING.jpg')"></div>
-    <div class="slide" style="background-image:url('Images/BIGBANG.jpg')"></div>
-  </div>
+    <section class="hero-slider">
+        <div class="slide-container">
+            <div class="slide active" style="background-image: url('Images/LINK20.jpg')"></div>
+            <div class="slide" style="background-image: url('Images/TRAINING.jpg')"></div>
+            <div class="slide" style="background-image: url('Images/BIGBANG.jpg')"></div>
+        </div>
 
-  <div class="hero-text">
-      <h1>LINK.exe turns 20 years old</h1>
-      <p>Upholding excellence, serving the community</p>
-      <a href="attendance.html" class="getstarted-btn">Get started</a>` 
+        <div class="gradient-overlay"></div>
 
-  </div>
-
-  <button class="nav prev">&#10094;</button>
-  <button class="nav next">&#10095;</button>
-
-  <div class="dots"></div>
-</header>
-   
-<div class="aboutUs-wrapper">
-    <button id="aboutUsBtn" class="aboutUsBtn">Learn More About Us</button>
+        <div class="hero-content">
+            <h1>LINK.exe <br> <span>Attendance and <br> Inventory System</span></h1>
+            <p>Upholding Excellence, serving the community</p>
+            <a href="#" class="btn-get-started">Get Started</a>
+            
+            <div class="dots-container">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    </section>
 </div>
-            <footer>
+   
+
+<footer class="overlapping-footer">
+    <div class="pillars-container">
+        <div class="pillar-item">
+            <i class="fa-solid fa-brain"></i>
+            <p>Enrich</p>
+        </div>
+        <div class="pillar-item">
+            <i class="fa-solid fa-arrow-up"></i>
+            <p>Uphold</p>
+        </div>
+        <div class="pillar-item">
+            <i class="fa-solid fa-circle-dollar-to-slot"></i>
+            <p>Generate</p>
+        </div>
+        <div class="pillar-item">
+            <i class="fa-solid fa-users"></i>
+            <p>Serve</p>
+        </div>
+    </div>
                 <section class="about-link">
                     <div class="left-box">
                         <h2>ABOUT LINK.exe</h2>
@@ -102,7 +121,6 @@
             <p>Serving Community</p>
         </div>
     </div>
-</div>
                 </section>
                 <section class="team-section">
                     <div class="team-header">
@@ -218,35 +236,26 @@
   </script>
     
   <script>
-        const slides = document.querySelectorAll(".slide");
-        const dotsContainer = document.querySelector(".dots");
-        let index = 0;
+    const slides = document.querySelectorAll('.slide');
+    const dots = document.querySelectorAll('.dot');
+    let currentIndex = 0;
+    const slideInterval = 5000; // 5 seconds
 
-        // Create dots
-        slides.forEach((_, i)=>{
-        const dot=document.createElement("span");
-        if(i===0) dot.classList.add("active");
-        dot.addEventListener("click", ()=>goToSlide(i));
-        dotsContainer.appendChild(dot);
-        });
-        const dots = document.querySelectorAll(".dots span");
+    function nextSlide() {
+        // Remove active class from current slide and dot
+        slides[currentIndex].classList.remove('active');
+        dots[currentIndex].classList.remove('active');
 
-        function showSlide(i){
-        slides.forEach(s=>s.classList.remove("active"));
-        dots.forEach(d=>d.classList.remove("active"));
-        slides[i].classList.add("active");
-        dots[i].classList.add("active");
-        }
+        // Move to next index
+        currentIndex = (currentIndex + 1) % slides.length;
 
-        function next(){ index=(index+1)%slides.length; showSlide(index); }
-        function prev(){ index=(index-1+slides.length)%slides.length; showSlide(index); }
-        function goToSlide(i){ index=i; showSlide(i); }
+        // Add active class to new slide and dot
+        slides[currentIndex].classList.add('active');
+        dots[currentIndex].classList.add('active');
+    }
 
-        document.querySelector(".next").onclick=next;
-        document.querySelector(".prev").onclick=prev;
-
-        // Auto slide
-        setInterval(next, 5000);
+    // Start the auto-slide timer
+    setInterval(nextSlide, slideInterval);
     </script>
 <script>
   document.getElementById("aboutUsBtn").addEventListener("click", () => {
