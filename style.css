@@ -1802,7 +1802,7 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #DDEDF2 0%, #3b84be 100%);
     min-height: 100vh;
-    padding: 20px;
+    padding: 0px;
 }
 
 .container {
