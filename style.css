@@ -228,6 +228,242 @@
 }
 
 
+/*LOGIN*/
+.login-container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(180deg, #b2faff 0%, #024476 100%);
+    overflow: hidden;
+}
+
+
+/*Gender Select Button*/
+.gender-select {
+    width: 100%;
+    padding: 15px 20px;
+    border: 2px solid #e1e8ef;
+    border-radius: 30px; /* Matches your text inputs */
+    outline: none;
+    font-size: 1rem;
+    color: #333;
+    background-color: white;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+    
+    /* This ensures the text isn't cut off on some browsers */
+    appearance: none; 
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2303508C' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+    background-size: 15px;
+}
+
+.gender-select:focus {
+    border-color: #03508C; /* Changes to brand blue on click */
+}
+
+/* Style the placeholder color */
+.gender-select:invalid {
+    color: #999;
+}
+
+/* Left Side Styles */
+.welcome-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.welcome-content h1 {
+    font-size: 4rem;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.welcome-content p {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-bottom: 20px;
+}
+
+.mascot {
+    max-width: 250px;
+    height: auto;
+}
+
+/* Right Side Styles */
+.form-side {
+    flex: 1;
+    background-color: white;
+    border-top-left-radius: 60px;
+    border-bottom-left-radius: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-wrapper {
+    width: 100%;
+    max-width: 400px;
+    padding: 40px;
+    margin-bottom: px;
+}
+
+.form-wrapper h2 {
+    color: #004a8d;
+    font-size: 2.5rem;
+    margin-bottom: 0px;
+}
+
+.subtitle {
+    color: #555;
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+}
+
+/* Input Styling */
+.input-group {
+    position: relative;
+    margin-bottom: 10px;
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 15px 20px;
+    border: 2px solid #e1e8ef;
+    border-radius: 30px;
+    outline: none;
+    font-size: 1rem;
+    color: #333;
+}
+
+.show-password {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-weight: bold;
+    color: #004a8d;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+/* Options Styling */
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    margin-bottom: 30px;
+    color: #555;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.remember-me input {
+    margin-right: 8px;
+}
+
+.forgot-link {
+    text-decoration: none;
+    color: #555;
+}
+
+/* Button Styling */
+button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 30px;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 10px;
+    transition: 0.3s;
+
+}
+
+.btn-login {
+    background: linear-gradient(to right, #bcd6e5, #1e619a);
+    color: white;
+}
+
+.btn-cancel {
+    background-color: #e0e0e0;
+    color: #666;
+}
+
+/* Divider Style */
+.divider {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin: 20px 0;
+    color: #888;
+    font-size: 0.8rem;
+}
+
+.divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #e1e8ef;
+}
+
+.divider span {
+    padding: 0 10px;
+}
+
+/* Google Button Style */
+.btn-google {
+    width: 100%;
+    padding: 12px;
+    border-radius: 30px;
+    border: 2px solid #e1e8ef;
+    background-color: white;
+    color: #555;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-google img {
+    width: 20px;
+}
+
+.btn-google:hover {
+    background-color: #f8f9fa;
+    border-color: #d1d8df;
+}
+
+.signup-text {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.signup-text a {
+    color: #004a8d;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+/*DASHBOARD*/
 
 
         /* Stats Cards */

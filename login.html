@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="login.js" defer></script>
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="welcome-side">
+            <div class="welcome-content">
+                <h1>WELCOME!</h1>
+                <p>Upholding Excellence, serving the community</p>
+                <div class="mascot-container">
+                    <div class="slanting-oval"></div>
+                </div>
+                <img src="Images/Lex.png" alt="Mascot Character" class="mascot">
+            </div>
+        </div>
+
+        <div class="form-side">
+            <div class="form-wrapper">
+                <h2>LOGIN</h2>
+                <p class="subtitle">Login your account to get started</p>
+
+                <form>
+                    <div class="input-group">
+                        <input type="text" placeholder="Email" id="email" required>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="password" placeholder="Password" id="password" required>
+                        <span class="show-password">SHOW</span>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox"> <span>Remember me</span>
+                        </label>
+                        <a href="#" class="forgot-link">Forgot Password?</a>
+                    </div>
+
+                    <button type="submit" class="btn-login">Login</button>
+                    <button type="button" class="btn-cancel" onclick="window.location.href='index.html'">Cancel</button>
+                </form>
+
+                <p class="signup-text">Don't you have an account? <a href="signup.html">Sign Up</a></p>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>

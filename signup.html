@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | LINK.exe</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="module" src="signup.js" defer></script>
+</head>
+<body>
+    <div class="login-container">
+        <div class="welcome-side">
+            <div class="welcome-content">
+                <h1>JOIN US!</h1>
+                <p>Upholding Excellence, serving the community</p>
+            </div>
+
+            <div class="mascot-container">
+                <div class="slanting-oval"></div>
+                <img src="Images/Lex.png" class="mascot" alt="Mascot">
+            </div>
+        </div>
+
+        <div class="form-side scrollable">
+            <div class="form-wrapper">
+                <h2>SIGN UP</h2>
+                <p class="subtitle">Create your account to get started</p>
+                
+                <form>
+                    <div class="input-row">
+                        <div class="input-group">
+                            <input type="text" placeholder="Full Name" id="fullname" required>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" placeholder="Email" id="email" required>
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="text" placeholder="Cellphone Number (Personal)" id="cellnumber" required>
+                    </div>
+
+                    <div class="input-group">
+                        <select class="gender-select" id="gender-select" required>
+                            <option value="" disabled selected>Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <input type="password" placeholder="Create Password" id="password" required>
+                    </div>
+
+                    <button type="submit" class="btn-login" id="btn-login">Create Account</button>
+                    <div class="divider"><span>OR</span></div>
+
+                    <button type="button" class="btn-google-icon" id="googleBtn">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google Logo">
+                        Continue with Google
+                    </button>
+                </form>
+
+                <p class="signup-text">Already have an account? <a href="login.html">Login</a></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
