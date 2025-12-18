@@ -19,6 +19,7 @@ const analytics = getAnalytics(app);
 
 const auth = getAuth(app);
 
+
 //Submit Button
 const submit = document.getElementById('btn-login');
 submit.addEventListener("click", function (event) {
