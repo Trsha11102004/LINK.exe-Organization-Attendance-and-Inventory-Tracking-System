@@ -25,9 +25,21 @@ submit.addEventListener("click", function (event) {
     event.preventDefault()
 
     //Input
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+    const email = document.getElementById('enteremail').value;
+    const password = document.getElementById('enterpassword').value;
 
+
+const auth = getAuth();
+signInWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+  });
 
     signInWithEmailAndPassword (auth, email, password)
         .then((userCredential) => {
