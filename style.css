@@ -138,6 +138,10 @@ body {
 
 }
 
+.hero-content h1{
+    color: white;
+}
+
 /* Background Slides */
 .slide {
     position: absolute;
@@ -1817,6 +1821,7 @@ header {
     margin-bottom: 30px;
     margin-top: 70px;
 }
+
 
 h1 {
     color: #03508C;
