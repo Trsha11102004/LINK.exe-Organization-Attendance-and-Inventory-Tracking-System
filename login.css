@@ -1,0 +1,152 @@
+/* =========================================
+   1. Global & Layout
+   ========================================= */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+
+.login-container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(180deg, #b2faff 0%, #024476 100%);
+    overflow: hidden;
+}
+
+.welcome-side {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.welcome-content h1 { font-size: 4rem; letter-spacing: 2px; margin-bottom: 5px; }
+.welcome-content p { font-size: 1rem; opacity: 0.9; margin-bottom: 20px; }
+.mascot { max-width: 250px; height: auto; position: relative; z-index: 2; }
+
+/* Right Side (Form) */
+.form-side {
+    flex: 1;
+    background-color: white;
+    border-top-left-radius: 60px;
+    border-bottom-left-radius: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-wrapper { width: 100%; max-width: 400px; padding: 40px; }
+.form-wrapper h2 { color: #004a8d; font-size: 2.5rem; margin-bottom: 0px; }
+.subtitle { color: #555; font-size: 0.95rem; margin-bottom: 20px; }
+
+/* Inputs */
+.input-group { position: relative; margin-bottom: 15px; }
+
+input[type="text"], input[type="email"], input[type="password"] {
+    width: 100%;
+    padding: 15px 20px;
+    border: 2px solid #e1e8ef;
+    border-radius: 30px;
+    outline: none;
+    font-size: 1rem;
+    color: #333;
+    transition: 0.3s;
+}
+
+input:focus { border-color: #004a8d; }
+
+.show-password {
+    position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+    font-weight: bold; color: #004a8d; cursor: pointer; font-size: 0.8rem; user-select: none;
+}
+
+/* Options */
+.form-options {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.85rem; margin-bottom: 30px; color: #555;
+}
+
+.remember-me { display: flex; align-items: center; cursor: pointer; }
+.remember-me input { margin-right: 8px; }
+
+.forgot-link { text-decoration: none; color: #555; cursor: pointer; }
+.forgot-link:hover { color: #004a8d; }
+
+/* Buttons */
+button {
+    padding: 12px; border-radius: 30px; border: none; font-size: 1rem;
+    font-weight: 600; cursor: pointer; margin-bottom: 10px; transition: 0.3s; width: 100%;
+}
+
+.btn-login { background: linear-gradient(to right, #bcd6e5, #1e619a); color: white; }
+.btn-login:hover { background: linear-gradient(to right, #a2c6da, #164f80); transform: translateY(-2px); }
+
+.btn-cancel { background-color: #e0e0e0; color: #666; }
+.btn-cancel:hover { background-color: #d0d0d0; }
+
+.signup-text { text-align: center; font-size: 0.9rem; color: #555; margin-top: 15px; }
+.signup-text a { color: #004a8d; text-decoration: none; font-weight: bold; }
+
+/* =========================================
+   2. Waiting / Wizard UI
+   ========================================= */
+.hidden { display: none !important; }
+.wizard-step { animation: fadeIn 0.4s ease; text-align: center; }
+.wizard-header { margin-bottom: 20px; }
+.wizard-header h3 { color: #03508C; font-size: 1.5rem; margin-bottom: 10px; }
+.wizard-header p { color: #666; font-size: 0.9rem; }
+
+/* Spinner Animation */
+.spinner {
+    width: 50px; height: 50px; margin: 0 auto 20px auto;
+    border: 5px solid #e1e8ef; border-top: 5px solid #03508C;
+    border-radius: 50%; animation: spin 1s linear infinite;
+}
+
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+.pulse-text { color: #03508C; font-weight: 600; animation: pulse 1.5s infinite; }
+@keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
+
+.success-animation i { font-size: 3rem; color: #059669; margin-bottom: 15px; }
+
+
+/* =========================================
+   3. Waiting / Wizard UI (Existing)
+   ========================================= */
+.hidden { display: none !important; }
+.wizard-step { animation: fadeIn 0.4s ease; text-align: center; }
+.spinner {
+    width: 50px; height: 50px; margin: 0 auto 20px auto;
+    border: 5px solid #e1e8ef; border-top: 5px solid #03508C;
+    border-radius: 50%; animation: spin 1s linear infinite;
+}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.pulse-text { color: #03508C; font-weight: 600; animation: pulse 1.5s infinite; }
+@keyframes pulse { 0% { opacity: 0.6; } 50% { opacity: 1; } 100% { opacity: 0.6; } }
+.success-animation i { font-size: 3rem; color: #059669; margin-bottom: 15px; }
+
+/* =========================================
+   4. NEW: Confirmation Card UI
+   ========================================= */
+/* This mimics the look of the Login form but simpler */
+.confirm-wrapper {
+    text-align: center;
+    padding: 20px;
+    animation: fadeIn 0.5s ease;
+}
+
+.confirm-wrapper h1 { color: #03508C; margin-bottom: 10px; }
+.confirm-wrapper p { color: #666; margin-bottom: 30px; }
+
+.btn-yes {
+    background: #059669; color: white; width: 100%; padding: 12px;
+    border: none; border-radius: 30px; font-weight: bold; cursor: pointer; font-size: 1rem;
+    transition: 0.3s;
+}
+.btn-yes:hover { background: #047857; transform: translateY(-2px); }

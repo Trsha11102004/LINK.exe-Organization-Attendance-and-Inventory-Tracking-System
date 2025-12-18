@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - LINK.exe</title>
-    <link rel="stylesheet" href="style.css">
+    
+    <link rel="stylesheet" href="dashboard.css">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
     <script type="module" src="auth-guard.js" defer></script>
 </head>
   
 <body>
-<div>
     <nav class="nav-bar">
         <div class="nav-links">
-          <div class=logo></div>
+          <div class="logo"></div>
 
           <ul>
             <li><a href="index.html">Home</a></li>
@@ -21,29 +23,30 @@
             <li><a href="attendance.html">Attendance</a></li>
             <li><a href="equipments inventory.html">Equipments</a></li>
             <li><a href="reports.html">Reports</a></li>
-            <li><a href="members.html">Members</a></li>
           </ul>
         </div>
-        
-        <button class="logout-btn" onclick="alert('Logout functionality')">
-            <i class="fas fa-sign-out-alt"></i> Logout
-        </button>
+
+        <button class="add-event-btn" onclick="openAddEventModal()">
+                <i class="fas fa-plus"></i> Add Event
+            </button>
+
     </nav>
 
-<!-- Statistics Overview -->
+    <div class="dashboard-container">
+        
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-icon blue">
                     <i class="fas fa-calendar-check"></i>
                 </div>
-                <div class="stat-value" id="totalEvents">0</div>
+                <div class="stat-value" id="totalEvents">5</div> 
                 <div class="stat-label">Total Events</div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon green">
                     <i class="fas fa-users"></i>
                 </div>
-                <div class="stat-value" id="totalMembers">0</div>
+                <div class="stat-value" id="totalMembers">45</div>
                 <div class="stat-label">Active Members</div>
             </div>
             <div class="stat-card">
@@ -62,75 +65,79 @@
             </div>
         </div>
 
-<div class="activity-section">
-    <div class="activity-card">
-        <div class="activity-header">
-            <h2>Event Attendance</h2>
-            <a href="attendance.html" class="view-more-btn">View More</a>
-        </div>
-        <ul class="activity-list">
-            <li class="activity-item">
-                <span class="activity-title">CICT Orientation</span>
-                <span class="activity-text"><strong>45</strong> members attended</span>
-            </li>
-            <li class="activity-item">
-                <span class="activity-title">University Freshmen Orientation</span>
-                <span class="activity-text"><strong>49</strong> members attended</span>
-            </li>
-            <li class="activity-item">
-                <span class="activity-title">BIGBANG: Welcome Activity</span>
-                <span class="activity-text"><strong>35</strong> members attended</span>
-            </li>
-            <li class="activity-item">
-                <span class="activity-title">MEDIA 360: Full Circle in Production Training Day</span>
-                <span class="activity-text"><strong>38</strong> members attended</span>
-            </li>
-            <li class="activity-item">
-                <span class="activity-title">SPECTRA: Advance Photography and Post Production Process</span>
-                <span class="activity-text"><strong>36</strong> members attended</span>
-            </li>
-        </ul>
-    </div>
+        <div class="activity-section">
             
-    <div class="activity-card">
-        <div class="activity-header">
-            <h2>Equipment Logs</h2>
-            <a href="equipments inventory.html" class="view-more-btn">View More</a>
+            <div class="activity-card">
+                <div class="activity-header">
+                    <h2>Event Attendance</h2>
+                    <a href="attendance.html" class="view-more-btn">View More</a>
+                </div>
+                <ul class="activity-list">
+                    <li class="activity-item">
+                        <span class="activity-title">CICT Orientation</span>
+                        <span class="activity-text"><strong>45</strong> members attended</span>
+                    </li>
+                    <li class="activity-item">
+                        <span class="activity-title">University Freshmen Orientation</span>
+                        <span class="activity-text"><strong>49</strong> members attended</span>
+                    </li>
+                    <li class="activity-item">
+                        <span class="activity-title">BIGBANG: Welcome Activity</span>
+                        <span class="activity-text"><strong>35</strong> members attended</span>
+                    </li>
+                    <li class="activity-item">
+                        <span class="activity-title">MEDIA 360: Full Circle in Production</span>
+                        <span class="activity-text"><strong>38</strong> members attended</span>
+                    </li>
+                    <li class="activity-item">
+                        <span class="activity-title">SPECTRA: Advance Photography</span>
+                        <span class="activity-text"><strong>36</strong> members attended</span>
+                    </li>
+                </ul>
+            </div>
+                    
+            <div class="activity-card">
+                <div class="activity-header">
+                    <h2>Equipment Logs</h2>
+                    <a href="equipments inventory.html" class="view-more-btn">View More</a>
+                </div>
+                <ul class="activity-list">
+                    <li class="activity-item">
+                        <span class="activity-title">Laptop #12</span>
+                        <span class="activity-text">
+                            <span class="status-badge status-borrowed">Borrowed</span> by John Doe — 10 mins ago
+                        </span>
+                    </li>
+                    <li class="activity-item">
+                        <span class="activity-title">Projector #03</span>
+                        <span class="activity-text">
+                            <span class="status-badge status-returned">Returned</span> by Lisa Chen — 25 mins ago
+                        </span>
+                    </li>
+                    <li class="activity-item">
+                        <span class="activity-title">Camera #05</span>
+                        <span class="activity-text">
+                            <span class="status-badge status-borrowed">Borrowed</span> by Mike Johnson — 45 mins ago
+                        </span>
+                    </li>
+                    <li class="activity-item">
+                        <span class="activity-title">Microphone Set</span>
+                        <span class="activity-text">
+                            <span class="status-badge status-returned">Returned</span> by Sarah Lee — 1 hour ago
+                        </span>
+                    </li>
+                    <li class="activity-item">
+                        <span class="activity-title">Extension Cord #08</span>
+                        <span class="activity-text">
+                            <span class="status-badge status-borrowed">Borrowed</span> by Tom Wilson — 2 hours ago
+                        </span>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <ul class="activity-list">
-            <li class="activity-item">
-                <span class="activity-title">Laptop #12</span>
-                <span class="activity-text">
-                    <span class="status-badge status-borrowed">Borrowed</span> by John Doe — 10 minutes ago
-                </span>
-            </li>
-            <li class="activity-item">
-                <span class="activity-title">Projector #03</span>
-                <span class="activity-text">
-                    <span class="status-badge status-returned">Returned</span> by Lisa Chen — 25 minutes ago
-                </span>
-            </li>
-            <li class="activity-item">
-                <span class="activity-title">Camera #05</span>
-                <span class="activity-text">
-                    <span class="status-badge status-borrowed">Borrowed</span> by Mike Johnson — 45 minutes ago
-                </span>
-            </li>
-            <li class="activity-item">
-                <span class="activity-title">Microphone Set</span>
-                <span class="activity-text">
-                    <span class="status-badge status-returned">Returned</span> by Sarah Lee — 1 hour ago
-                </span>
-            </li>
-            <li class="activity-item">
-                <span class="activity-title">Extension Cord #08</span>
-                <span class="activity-text">
-                    <span class="status-badge status-borrowed">Borrowed</span> by Tom Wilson — 2 hours ago
-                </span>
-            </li>
-        </ul>
-</div>
-</div>
+    </div>
 
+    <script type="module" src="dashboard.js"></script>
+    <script type="module" src="logout.js"></script>
 </body>
 </html>

@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <link rel="stylesheet" href="style.css">
-    <script type="module" src="login.js" defer></script>
+    <title>Login - LINK.exe</title>
+    <link rel="stylesheet" href="login.css">
+    
+    <script type="module" src="login.js"></script>
 </head>
 
 <body>
@@ -16,9 +16,8 @@
                 <h1>WELCOME!</h1>
                 <p>Upholding Excellence, serving the community</p>
                 <div class="mascot-container">
-                    <div class="slanting-oval"></div>
+                    <img src="Images/Lex.png" alt="Mascot Character" class="mascot">
                 </div>
-                <img src="Images/Lex.png" alt="Mascot Character" class="mascot">
             </div>
         </div>
 
@@ -27,21 +26,21 @@
                 <h2>LOGIN</h2>
                 <p class="subtitle">Login your account to get started</p>
 
-                <form>
+                <form id="loginForm">
                     <div class="input-group">
                         <input type="text" placeholder="Email" id="enteremail" required>
                     </div>
 
                     <div class="input-group">
                         <input type="password" placeholder="Password" id="enterpassword" required>
-                        <span class="show-password">SHOW</span>
+                        <span class="show-password" id="togglePassword">SHOW</span>
                     </div>
 
                     <div class="form-options">
                         <label class="remember-me">
                             <input type="checkbox"> <span>Remember me</span>
                         </label>
-                        <a href="#" class="forgot-link">Forgot Password?</a>
+                        <a href="#" class="forgot-link" id="forgotPasswordBtn">Forgot Password?</a>
                     </div>
 
                     <button type="submit" class="btn-login" id="btn-login">Login</button>
@@ -53,5 +52,4 @@
         </div>
     </div>
 </body>
-
 </html>
