@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="attendance.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+
 <body>
+    <div class="body-attendance">
+    <!-- Navigation Bar -->
     <nav class="nav-bar">
         <div class="nav-links">
           <div class="logo"></div>
@@ -28,10 +31,12 @@
 
     <div class="container">
         <header>
+            <div class="header-attendance">
             <h1>Attendance</h1>
             <button class="add-event-btn" onclick="openAddEventModal()">
                 <i class="fas fa-plus"></i> Add Event
             </button>
+            </div>
         </header>
 
         <div class="activity-card">
@@ -141,6 +146,7 @@
                 </form>
             </div>
         </div>
+    </div>
     </div>
 
     <script type="module" src="attendance.js"></script>
