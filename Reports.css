@@ -1,0 +1,219 @@
+/* =========================================
+   1. GLOBAL & NAVIGATION
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #DDEDF2 0%, #3b84be 100%);
+    min-height: 100vh;
+}
+
+.nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    z-index: 1000;
+    background-color: #4cbbde;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    padding: 0 40px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    background-image: url('Images/LINK.exe\ Logo_Secondary\ White.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.nav-links ul {
+    display: flex;
+    list-style: none;
+    gap: 15px;
+}
+
+.nav-links ul li a {
+    color: #ffffff;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95em;
+    border-radius: 50px;
+    transition: 0.3s ease;
+}
+
+.nav-links a.active, .nav-links a:hover {
+    background: #03508c;
+}
+
+/* =========================================
+   2. REPORTS LAYOUT
+   ========================================= */
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header.report-header {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    margin-top: 100px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 { color: #03508C; font-size: 1.8em; margin-bottom: 5px; }
+header p { color: #666; font-size: 0.95em; }
+
+.report-section {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    margin-bottom: 30px;
+}
+
+.report-section.no-bg {
+    background: transparent;
+    box-shadow: none;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.section-header h2 {
+    color: #03508C;
+    font-size: 1.4em;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* =========================================
+   3. DATA TABLES & PROGRESS
+   ========================================= */
+.table-wrapper {
+    overflow-x: auto;
+    border: 1px solid #eee;
+    border-radius: 10px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th {
+    background: #f8fafc;
+    color: #03508C;
+    font-weight: 600;
+    padding: 15px;
+    text-align: left;
+    border-bottom: 2px solid #eee;
+}
+
+td {
+    padding: 15px;
+    border-bottom: 1px solid #f1f1f1;
+    color: #444;
+}
+
+.progress-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 8px;
+    background: #eef2f3;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #03508C, #4CBBDE);
+    transition: width 0.5s ease-out;
+}
+
+.percentage { font-weight: 700; color: #03508C; font-size: 0.9em; }
+
+/* =========================================
+   4. PILLAR CARDS
+   ========================================= */
+.pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.report-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    border-left: 6px solid #ccc;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+.report-card:hover { transform: translateY(-5px); }
+
+.report-card-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.card-title { font-weight: 700; color: #112653; font-size: 1.1em; }
+.card-value { font-size: 1.8em; font-weight: 800; }
+
+/* =========================================
+   5. BUTTONS & BADGES
+   ========================================= */
+.btn-export {
+    background: #03508C;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn-export:hover { background: #024070; }
+
+.badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.badge-available { background: #d1fae5; color: #065f46; }
+.badge-borrowed { background: #fee2e2; color: #991b1b; }
+
+@media print {
+    .nav-bar, .logout-btn, .btn-export { display: none !important; }
+    body { background: white; }
+    header.report-header { margin-top: 0; box-shadow: none; border: 1px solid #eee; }
+}
