@@ -1170,79 +1170,79 @@ button {
     align-items: center;
 }
  
-h1 {
+.header-attendance h1 {
     color: #03508C;
     font-size: 2em;
-        }
+}
 
-        .add-event-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-            font-size: 1em;
-        }
+.add-event-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    font-size: 1em;
+}
 
-        .add-event-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-        }
+.add-event-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
 
-        /* Overall Attendance Table */
-        .activity-card {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
+/* Overall Attendance Table */
+.activity-card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
 
-        .activity-card h2 {
-            color: #03508C;
-            margin-bottom: 20px;
-            font-size: 1.6em;
-        }
+.activity-card h2 {
+    color: #03508C;
+    margin-bottom: 20px;
+    font-size: 1.6em;
+}
 
-        .table-wrapper {
-            overflow-x: auto;
-            overflow-y: auto;
-            max-height: 600px;
-            position: relative;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-        }
+.table-wrapper {
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 600px;
+    position: relative;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+}
 
-        .table-wrapper::-webkit-scrollbar {
-            width: 10px;
-            height: 10px;
-        }
+.table-wrapper::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
 
-        .table-wrapper::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 5px;
-        }
+.table-wrapper::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 5px;
+}
 
-        .table-wrapper::-webkit-scrollbar-thumb {
-            background: #03508C;
-            border-radius: 5px;
-        }
+.table-wrapper::-webkit-scrollbar-thumb {
+    background: #03508C;
+    border-radius: 5px;
+}
 
-        .table-wrapper::-webkit-scrollbar-thumb:hover {
-            background: #024070;
-        }
+.table-wrapper::-webkit-scrollbar-thumb:hover {
+    background: #024070;
+}
 
-        .table-wrapper::-webkit-scrollbar-corner {
-            background: #f1f1f1;
-        }
+.table-wrapper::-webkit-scrollbar-corner {
+    background: #f1f1f1;
+}
 
-        table {
+table {
             width: 100%;
             border-collapse: collapse;
             background: white;
@@ -1741,3 +1741,399 @@ h1 {
                 overflow-x: scroll;
             }
         }
+
+/* EQUIPMENT PAGE */
+/* =========================================
+   1. Global & Reset
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #DDEDF2 0%, #3b84be 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* =========================================
+   2. Header & Typography
+   ========================================= */
+header {
+    background: white;
+    padding: 25px 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+    margin-top: 70px;
+}
+
+h1 {
+    color: #03508C;
+    font-size: 2em;
+}
+
+h2 {
+    color: #03508C;
+    margin-bottom: 20px;
+    font-size: 1.6em;
+}
+
+/* =========================================
+   3. Tables & Cards
+   ========================================= */
+.summary-card, 
+.borrowed-section {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+th {
+    background: #f9fafb;
+    color: #03508C;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+td {
+    color: #333;
+}
+
+tbody tr:hover {
+    background: #f9fafb;
+}
+
+/* =========================================
+   4. Status Badges
+   ========================================= */
+.status-badge {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 600;
+}
+
+.status-available {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.status-borrowed {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* =========================================
+   5. Buttons & Actions
+   ========================================= */
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.btn, .submit-btn, .return-btn, .table-btn {
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Main Page Buttons */
+.btn {
+    padding: 12px 30px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1em;
+}
+
+.btn-primary, .submit-btn {
+    background: #03508C;
+    color: white;
+}
+
+.btn-primary:hover, .submit-btn:hover {
+    background: #024070;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(3, 80, 140, 0.3);
+}
+
+.btn-secondary {
+    background: white;
+    color: #03508C;
+    border: 2px solid #03508C;
+}
+
+.btn-secondary:hover {
+    background: #f0f4f8;
+    transform: translateY(-2px);
+}
+
+/* Table Action Buttons */
+.action-cell {
+    display: flex;
+    gap: 8px;
+}
+
+.table-btn {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.85em;
+}
+
+.btn-edit {
+    background: #f59e0b;
+    color: white;
+}
+
+.btn-edit:hover {
+    background: #d97706;
+}
+
+.btn-delete {
+    background: #dc2626;
+    color: white;
+}
+
+.btn-delete:hover {
+    background: #b91c1c;
+}
+
+/* Borrow/Return Specific Buttons */
+.return-btn {
+    background: #059669;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+}
+
+.return-btn:hover {
+    background: #047857;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 12px 30px;
+    font-size: 1em;
+}
+
+/* =========================================
+   6. Borrowed List Items
+   ========================================= */
+.borrowed-item {
+    padding: 15px;
+    background: #f9fafb;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border-left: 4px solid #991b1b;
+}
+
+.borrowed-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.borrowed-item-name {
+    font-weight: 700;
+    color: #112653;
+    font-size: 1.1em;
+}
+
+.borrowed-details {
+    font-size: 0.9em;
+    color: #666;
+    line-height: 1.6;
+}
+
+/* =========================================
+   7. Empty States
+   ========================================= */
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+}
+
+.empty-state i {
+    font-size: 4em;
+    color: #ddd;
+    margin-bottom: 15px;
+}
+
+/* =========================================
+   8. Forms & Inputs
+   ========================================= */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #03508C;
+}
+
+.form-group input:disabled {
+    background: #f0f0f0;
+    cursor: not-allowed;
+}
+
+/* =========================================
+   9. Modals & Animations
+   ========================================= */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 0;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+    animation: slideDownModal 0.3s ease;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.modal-header {
+    background: linear-gradient(135deg, #03508C 0%, #024070 100%);
+    color: white;
+    padding: 20px 30px;
+    border-radius: 15px 15px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.modal-header h2 {
+    font-size: 1.5em;
+    margin: 0;
+    color: white; /* Override global h2 color for modal header */
+}
+
+.modal-body {
+    padding: 30px;
+}
+
+.close {
+    color: white;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.close:hover {
+    transform: scale(1.2);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideDownModal {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* =========================================
+   10. Responsive Design
+   ========================================= */
+@media (max-width: 768px) {
+    .nav-bar {
+        padding: 10px 15px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+
+    .table-wrapper {
+        overflow-x: scroll;
+    }
+}
