@@ -394,11 +394,13 @@ button {
 }
 
 .btn-login {
+    width: 100%;
     background: linear-gradient(to right, #bcd6e5, #1e619a);
     color: white;
 }
 
 .btn-cancel {
+    width: 100%;
     background-color: #e0e0e0;
     color: #666;
 }
