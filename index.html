@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - LINK.exe</title>
-    <link rel="stylesheet" href="style.css">
+    
+    <link rel="stylesheet" href="index.css">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
   
@@ -12,7 +14,7 @@
 <div>
     <nav class="nav-bar">
         <div class="nav-links">
-          <div class=logo></div>
+          <div class="logo"></div>
 
           <ul>
             <li><a href="index.html" class="active">Home</a></li>
@@ -20,11 +22,10 @@
             <li><a href="attendance.html">Attendance</a></li>
             <li><a href="equipments inventory.html">Equipments</a></li>
             <li><a href="reports.html">Reports</a></li>
-            <li><a href="members.html">Members</a></li>
           </ul>
         </div>
         
-        <button class="logout-btn" onclick="alert('Logout functionality')">
+        <button class="logout-btn" onclick="handleLogout()">
             <i class="fas fa-sign-out-alt"></i> Logout
         </button>
     </nav>
@@ -41,7 +42,6 @@
         <div class="hero-content">
             <h1>LINK.exe <br> <span>Attendance and <br> Inventory System</span></h1>
             <p>Upholding Excellence, serving the community</p>
-            <a href="login" class="btn-get-started">Get Started</a>
             
             <div class="dots-container">
                 <span class="dot active"></span>
@@ -71,225 +71,120 @@
             <p>Serve</p>
         </div>
     </div>
-                <section class="about-link">
-                    <div class="left-box">
-                        <h2>ABOUT LINK.exe</h2>
-                        <p>
-                        LINK.exe is a special interest group of the College of Information and Communications 
-                        Technology students of West Visayas State University which aims to promote and utilize 
-                        ICT to all and across multi-disciplinary fields.
-                        </p>
-                        <br> <br>
-                        <br> <br>
-                        <h2>FOUR PILLARS</h2>
-                        <p class="pillar-link" data-target="enrich">Training</p>
-                        <p class="pillar-link" data-target="uphold">Program</p>
-                        <p class="pillar-link" data-target="generate">Income Generating Projects</p>
-                        <p class="pillar-link" data-target="serve">Extension</p>
-                    </div>
 
-                    <div class="pillars-grid">
-    <div class="pillar-card" id="enrich">
-        <img src="Images/Enrich.jpg" alt="Enrich">
-        <div class="overlay">
-            <h3>TRAINING</h3>
-            <p>Enriching Minds</p>
+    <section class="about-link">
+        <div class="left-box">
+            <h2>ABOUT LINK.exe</h2>
+            <p>
+            LINK.exe is a special interest group of the College of Information and Communications 
+            Technology students of West Visayas State University which aims to promote and utilize 
+            ICT to all and across multi-disciplinary fields.
+            </p>
+            <br> <br>
+            <br> <br>
+            <h2>FOUR PILLARS</h2>
+            <p class="pillar-link" data-target="enrich">Training</p>
+            <p class="pillar-link" data-target="uphold">Program</p>
+            <p class="pillar-link" data-target="generate">Income Generating Projects</p>
+            <p class="pillar-link" data-target="serve">Extension</p>
+        </div>
+
+        <div class="pillars-grid">
+            <div class="pillar-card" id="enrich">
+                <img src="Images/Enrich.jpg" alt="Enrich">
+                <div class="overlay">
+                    <h3>TRAINING</h3>
+                    <p>Enriching Minds</p>
+                </div>
+            </div>
+
+            <div class="pillar-card" id="uphold">
+                <img src="Images/Uphold.jpg" alt="Uphold">
+                <div class="overlay">
+                    <h3>PROGRAM</h3>
+                    <p>Upholding Excellence</p>
+                </div>
+            </div>
+
+            <div class="pillar-card" id="generate">
+                <img src="Images/IGP.jpg" alt="Generate">
+                <div class="overlay">
+                    <h3>IGP</h3>
+                    <p>Generating Hope</p>
+                </div>
+            </div>
+
+            <div class="pillar-card" id="serve">
+                <img src="Images/Extension.jpg" alt="Serve">
+                <div class="overlay">
+                    <h3>EXTENSION</h3>
+                    <p>Serving Community</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section">
+        <div class="team-header">
+            <h2><span>OUR</span> TEAM</h2>
+            <p>Juliana Paula Binas, Trisha Mae Lombendencio, and Angelika Jean Ocana are third-year BS Information Systems students from West Visayas State University. Beyond their academic journey, the trio has been actively serving the LINK.exe Organization since their first year in college and continue to take on leadership roles as dedicated officers. Their shared commitment to media service, technical excellence, and organizational growth reflects their passion not just for technology, but for meaningful collaboration and community-building within the university.</p>
+        </div>
+
+        <div class="team-wrapper">
+            <div class="team-card">
+                <img src="Images/Juliana.jpg" alt="Team Member 1">
+                <div class="info">
+                    <h3>JULIANA PAULA</h3>
+                    <p>T. Binas</p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <img src="Images/Trisha.jpg" alt="Team Member 2">
+                <div class="info">
+                    <h3>TRISHA MAE</h3>
+                    <p>C. Lombendencio</p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <img src="Images/Angelika.jpg" alt="Team Member 3">
+                <div class="info">
+                    <h3>ANGELIKA JEAN</h3>
+                    <p>J. Ocana</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="contact">
+        <div class="social-grid">
+            <div class="social-card">
+                <div class="icon-circle"><i class="fa-brands fa-facebook-f"></i></div>
+                <h4>Facebook</h4>
+                <a href="https://www.facebook.com/linkexeofficial" target="_blank">Visit Page</a>
+            </div>
+
+            <div class="social-card">
+                <div class="icon-circle"><i class="fa-solid fa-envelope"></i></div>
+                <h4>Email</h4>
+                <a href="mailto:link.exe@wvsu.edu.ph" target="_blank">Send Message</a>
+            </div>
+
+            <div class="social-card">
+                <div class="icon-circle"><i class="fa-brands fa-tiktok"></i></div>
+                <h4>TikTok</h4>
+                <a href="https://tiktok.com/@linkexeofficial" target="_blank">Watch Content</a>
+            </div>
         </div>
     </div>
 
-    <div class="pillar-card" id="uphold">
-        <img src="Images/Uphold.jpg" alt="Uphold">
-        <div class="overlay">
-            <h3>PROGRAM</h3>
-            <p>Upholding Excellence</p>
-        </div>
-    </div>
+    <button id="backToTop">
+        <i class="fa-solid fa-angles-up"></i>
+    </button>
+</footer>
 
-    <div class="pillar-card" id="generate">
-        <img src="Images/IGP.jpg" alt="Generate">
-        <div class="overlay">
-            <h3>IGP</h3>
-            <p>Generating Hope</p>
-        </div>
-    </div>
-
-    <div class="pillar-card" id="serve">
-        <img src="Images/Extension.jpg" alt="Serve">
-        <div class="overlay">
-            <h3>EXTENSION</h3>
-            <p>Serving Community</p>
-        </div>
-    </div>
-                </section>
-                <section class="team-section">
-                    <div class="team-header">
-                        <h2><span>OUR</span> TEAM</h2>
-                        <p>Juliana Paula Binas, Trisha Mae Lombendencio, and Angelika Jean Ocana are third-year BS Information Systems students from West Visayas State University. Beyond their academic journey, the trio has been actively serving the LINK.exe Organization since their first year in college and continue to take on leadership roles as dedicated officers. Their shared commitment to media service, technical excellence, and organizational growth reflects their passion not just for technology, but for meaningful collaboration and community-building within the university.</p>
-                    </div>
-
-                    <div class="team-wrapper">
-                        <div class="team-card">
-                        <img src="Images/Juliana.jpg" alt="Team Member 1">
-                        <div class="info">
-                            <h3>JULIANA PAULA</h3>
-                            <p>T. Binas</p>
-                        </div>
-                        </div>
-
-                        <div class="team-card">
-                        <img src="Images/Trisha.jpg" alt="Team Member 2">
-                        <div class="info">
-                            <h3>TRISHA MAE</h3>
-                            <p>C. Lombendencio</p>
-                        </div>
-                        </div>
-
-                        <div class="team-card">
-                        <img src="Images/Angelika.jpg" alt="Team Member 3">
-                        <div class="info">
-                            <h3>ANGELIKA JEAN</h3>
-                            <p>J. Ocana</p>
-                        </div>
-                        </div>
-                    </div>
-                </section>
-<div class="contact">
-    <div class="social-grid">
-        <div class="social-card">
-            <div class="icon-circle"><i class="fa-brands fa-facebook-f"></i></div>
-            <h4>Facebook</h4>
-            <a href="https://www.facebook.com/linkexeofficial" target="_blank">Visit Page</a>
-        </div>
-
-        <div class="social-card">
-            <div class="icon-circle"><i class="fa-solid fa-envelope"></i></div>
-            <h4>Email</h4>
-            <a href="mailto:link.exe@wvsu.edu.ph" target="_blank">Send Message</a>
-        </div>
-
-        <div class="social-card">
-            <div class="icon-circle"><i class="fa-brands fa-tiktok"></i></div>
-            <h4>TikTok</h4>
-            <a href="https://tiktok.com/@linkexeofficial" target="_blank">Watch Content</a>
-        </div>
-    </div>
-</div>
-
-            <button id="backToTop">
-                <i class="fa-solid fa-angles-up"></i>
-            </button>
-    </div>
-    <script>
-    document.addEventListener("scroll", function () {
-        const footer = document.querySelector("footer");
-        const rect = footer.getBoundingClientRect();
-
-        if (rect.top < window.innerHeight) {
-            footer.style.background = "rgba(255, 255, 255, 0.85)"; // lighter solid bg
-        } else {
-            footer.style.background = "rgba(255, 255, 255, 0.2)"; // transparent
-        }
-    });
-    </script>
-    <script>
-        // Simulate real-time updates
-        const stats = {
-            members: 45,
-            present: 38,
-            equipment: 25,
-            borrowed: 15
-        };
-
-        // Update timestamp dynamically
-        function updateTimestamps() {
-            const items = document.querySelectorAll('.activity-time');
-            items.forEach((item, index) => {
-                const minutes = [2, 15, 32, 60, 60, 10, 25, 45, 60, 120];
-                if (minutes[index] < 60) {
-                    item.textContent = `${minutes[index]} minutes ago`;
-                } else {
-                    item.textContent = `${Math.floor(minutes[index] / 60)} hour${Math.floor(minutes[index] / 60) > 1 ? 's' : ''} ago`;
-                }
-            });
-        }
-        updateTimestamps();
-    </script>
-
-    <script>
-    // Back to top button
-    const backToTop = document.getElementById("backToTop");
-    window.addEventListener("scroll", () => {
-    // Check if the user has scrolled near the bottom
-    const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrolled = window.scrollY;
-    if (scrolled > scrollableHeight * 0.6) {
-      backToTop.style.display = "flex";
-    } else {
-      backToTop.style.display = "none";
-    }
-  });
-
-  backToTop.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-  </script>
-    
-  <script>
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
-    let currentIndex = 0;
-    const slideInterval = 5000; // 5 seconds
-
-    function nextSlide() {
-        // Remove active class from current slide and dot
-        slides[currentIndex].classList.remove('active');
-        dots[currentIndex].classList.remove('active');
-
-        // Move to next index
-        currentIndex = (currentIndex + 1) % slides.length;
-
-        // Add active class to new slide and dot
-        slides[currentIndex].classList.add('active');
-        dots[currentIndex].classList.add('active');
-    }
-
-    // Start the auto-slide timer
-    setInterval(nextSlide, slideInterval);
-    </script>
-<script>
-  document.getElementById("aboutUsBtn").addEventListener("click", () => {
-    document.querySelector("footer").scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-  });
-</script>
-<script>
-  const texts = document.querySelectorAll('.pillar-link');
-  const cards = document.querySelectorAll('.pillar-card');
-
-  texts.forEach(text => {
-    const targetId = text.getAttribute('data-target');
-    const targetCard = document.getElementById(targetId);
-
-    text.addEventListener('mouseenter', () => {
-      targetCard.classList.add('active');
-      text.classList.add('active');     // highlight text too
-    });
-
-    text.addEventListener('mouseleave', () => {
-      targetCard.classList.remove('active');
-      text.classList.remove('active');  // remove highlight
-    });
-  });
-</script>
-<script>
-document.getElementById("aboutUsBtn").addEventListener("click", () => {
-    document.querySelector("footer").scrollIntoView({
-        behavior: "smooth",
-        block: "start"
-    });
-});
-</script>
+<script src="index.js"></script>
+<script type="module" src="logout.js"></script>
 </body>
 </html>
