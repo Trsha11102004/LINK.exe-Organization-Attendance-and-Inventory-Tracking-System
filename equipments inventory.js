@@ -29,7 +29,7 @@ const equipmentCollection = collection(db, "equipment");
 
 // Global State
 let localEquipmentList = [];
-let borrowedView = false;
+let borrowedView = true; // UPDATED: Default is visible (True)
 let editMode = false;
 let currentEditId = null;
 
@@ -303,15 +303,18 @@ window.closeBorrowModal = function() {
     document.getElementById('borrowForm').reset();
 }
 
+// UPDATED: TOGGLE LOGIC (Flipped)
 window.toggleBorrowedView = function() {
     borrowedView = !borrowedView;
     const section = document.getElementById('borrowedSection');
     const btn = document.querySelector('.btn-secondary');
     
     if (borrowedView) {
+        // Show the list
         section.style.display = 'block';
         btn.innerHTML = '<i class="fas fa-list"></i> Hide Borrowed';
     } else {
+        // Hide the list
         section.style.display = 'none';
         btn.innerHTML = '<i class="fas fa-list"></i> View Borrowed';
     }

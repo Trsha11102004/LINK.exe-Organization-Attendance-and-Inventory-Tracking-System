@@ -14,10 +14,25 @@ body {
     padding: 20px;
 }
 
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
 /* =========================================
    2. Navigation Bar
    ========================================= */
-.nav-bar {
+.logo {
+    width: 60px;
+    height: 60px;
+    background-image: url('Images/LINK.exe\ Logo_Secondary\ White.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-left: 60px;
+    background-position: center;
+}
+
+   .nav-bar {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -28,16 +43,6 @@ body {
     left: 0;
     right: 0;
     gap: 16px;
-}
-
-.logo {
-    width: 60px;
-    height: 60px;
-    background-image: url('Images/LINK.exe\ Logo_Secondary\ White.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    margin-left: 60px;
-    background-position: center;
 }
 
 .nav-links {
@@ -70,14 +75,18 @@ body {
     text-align: center;
 }
 
-.nav-links a:hover,
+.nav-links a:hover {
+    background: #ffffff;
+    color: #06c6df;
+    border-radius: 50px;
+}
+
 .nav-links a.active {
     background: #03508c;
     color: #fff;
     border-radius: 50px;
 }
 
-/* Logout */
 .logout-btn {
     background: none;
     border: none;
@@ -90,24 +99,15 @@ body {
     margin-top: 10px;
 }
 
+.logout-btn:hover {
+    background: #ffffff;
+    color: #06c6df;
+    border-radius: 50px;
+}
+
 .logout-btn i {
     margin-right: 6px;
 }
-
-/* Navigation Hover */
-.nav-links a:hover {
-    background: #03508c;
-    color: #fff;
-    border-radius: 50px;
-}
-
-/* Logout hover */
-.logout-btn:hover {
-    background: #03508c;
-    color: #fff;
-    border-radius: 50px;
-}
-
 
 /* =========================================
    3. Container (Spacing for Fixed Nav)

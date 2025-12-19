@@ -10,144 +10,155 @@
 
 <body>
     <div class="body-attendance">
-    <!-- Navigation Bar -->
-    <nav class="nav-bar">
-        <div class="nav-links">
-          <div class="logo"></div>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="dashboard.html">Dashboard</a></li>
-            <li><a href="attendance.html" class="active">Attendance</a></li>
-            <li><a href="equipments inventory.html">Equipments</a></li>
-            <li><a href="reports.html">Reports</a></li>
-          </ul>
-        </div>
-        
-        <button class="logout-btn" onclick="alert('Logout functionality')">
-            <i class="fas fa-sign-out-alt"></i> Logout
-        </button>
-    </nav>
-
-    <div class="container">
-        <header>
-            <div class="header-attendance">
-            <h1>Attendance</h1>
-            <button class="add-event-btn" onclick="openAddEventModal()">
-                <i class="fas fa-plus"></i> Add Event
+        <nav class="nav-bar">
+            <div class="nav-links">
+                <div class="logo"></div>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="attendance.html" class="active">Attendance</a></li>
+                    <li><a href="equipments inventory.html">Equipments</a></li>
+                    <li><a href="reports.html">Reports</a></li>
+                </ul>
+            </div>
+            <button class="logout-btn" onclick="handleLogout()">
+                <i class="fas fa-sign-out-alt"></i> Logout
             </button>
-            </div>
-        </header>
+        </nav>
 
-        <div class="activity-card">
-            <h2>Overall Attendance Table</h2>
-            <div class="table-wrapper">
-                <table id="attendanceTable">
-                    <thead>
-                        <tr id="tableHeader">
-                            <th>Member Name</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableBody">
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        <div class="container">
+            <header>
+                <div class="header-attendance">
+                    <h1>Attendance</h1>
+                    <button class="add-event-btn" onclick="openAddEventModal()">
+                        <i class="fas fa-plus"></i> Add Event
+                    </button>
+                </div>
+            </header>
 
-        <div class="events-section">
-            <div class="events-header">
-                <h2>Event Details</h2>
-                <div class="filter-buttons">
-                    <button class="filter-btn active" data-pillar="all" onclick="filterEvents('all')">All</button>
-                    <button class="filter-btn" data-pillar="Extensions" onclick="filterEvents('Extensions')">Extensions</button>
-                    <button class="filter-btn" data-pillar="Training" onclick="filterEvents('Training')">Training</button>
-                    <button class="filter-btn" data-pillar="Programs" onclick="filterEvents('Programs')">Programs</button>
-                    <button class="filter-btn" data-pillar="IGP" onclick="filterEvents('IGP')">IGP</button>
+            <div class="activity-card">
+                <h2>Overall Attendance Table</h2>
+                <div class="table-wrapper">
+                    <table id="attendanceTable">
+                        <thead>
+                            <tr id="tableHeader">
+                                <th>Member Name</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
                 </div>
             </div>
-            <div class="event-grid" id="eventGrid">
+
+            <div class="events-section">
+                <div class="events-header">
+                    <h2>Event Details</h2>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-pillar="all" onclick="filterEvents('all')">All</button>
+                        <button class="filter-btn" data-pillar="Extensions" onclick="filterEvents('Extensions')">Extensions</button>
+                        <button class="filter-btn" data-pillar="Training" onclick="filterEvents('Training')">Training</button>
+                        <button class="filter-btn" data-pillar="Programs" onclick="filterEvents('Programs')">Programs</button>
+                        <button class="filter-btn" data-pillar="IGP" onclick="filterEvents('IGP')">IGP</button>
+                    </div>
+                </div>
+                <div class="event-grid" id="eventGrid"></div>
             </div>
         </div>
-    </div>
 
-    <div id="addEventModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Add New Event</h2>
-                <span class="close" onclick="closeAddEventModal()">&times;</span>
-            </div>
-            <div class="modal-body">
-                <form id="addEventForm">
-                    <div class="form-group">
-                        <label for="eventName">Event Name *</label>
-                        <input type="text" id="eventName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="eventPillar">Pillar *</label>
-                        <select id="eventPillar" required>
-                            <option value="">Select Pillar</option>
-                            <option value="Extensions">Extensions</option>
-                            <option value="Training">Training</option>
-                            <option value="Programs">Programs</option>
-                            <option value="IGP">IGP</option>
-                        </select>
-                    </div>
-                    
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="multiDayEvent" onchange="toggleDateRange()">
-                        <label for="multiDayEvent">Multi-day Event</label>
-                    </div>
-
-                    <div id="singleDate">
+        <div id="addEventModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Add New Event</h2>
+                    <span class="close" onclick="closeAddEventModal()">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <form id="addEventForm">
                         <div class="form-group">
-                            <label for="eventDate">Event Date *</label>
-                            <input type="date" id="eventDate" required>
-                        </div>
-                    </div>
-
-                    <div id="dateRange" class="date-range">
-                        <div class="form-group">
-                            <label for="eventStartDate">First Day *</label>
-                            <input type="date" id="eventStartDate">
+                            <label for="eventName">Event Name *</label>
+                            <input type="text" id="eventName" required>
                         </div>
                         <div class="form-group">
-                            <label for="eventEndDate">Last Day *</label>
-                            <input type="date" id="eventEndDate">
+                            <label for="eventPillar">Pillar *</label>
+                            <select id="eventPillar" required>
+                                <option value="">Select Pillar</option>
+                                <option value="Extensions">Extensions</option>
+                                <option value="Training">Training</option>
+                                <option value="Programs">Programs</option>
+                                <option value="IGP">IGP</option>
+                            </select>
                         </div>
-                    </div>
-
-                    <button type="submit" class="submit-btn">Create Event</button>
-                </form>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="multiDayEvent" onchange="toggleDateRange()">
+                            <label for="multiDayEvent">Multi-day Event</label>
+                        </div>
+                        <div id="singleDate">
+                            <div class="form-group">
+                                <label for="eventDate">Event Date *</label>
+                                <input type="date" id="eventDate" required>
+                            </div>
+                        </div>
+                        <div id="dateRange" class="date-range">
+                            <div class="form-group">
+                                <label for="eventStartDate">First Day *</label>
+                                <input type="date" id="eventStartDate">
+                            </div>
+                            <div class="form-group">
+                                <label for="eventEndDate">Last Day *</label>
+                                <input type="date" id="eventEndDate">
+                            </div>
+                        </div>
+                        <button type="submit" class="submit-btn">Create Event</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div id="addAttendeeModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Add Attendee</h2>
-                <span class="close" onclick="closeAddAttendeeModal()">&times;</span>
-            </div>
-            <div class="modal-body">
-                <form id="addAttendeeForm">
-                    <div class="form-group">
-                        <label for="attendeeName">Name *</label>
-                        <input type="text" id="attendeeName" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="attendeeRole">Role *</label>
-                        <input type="text" id="attendeeRole" placeholder="e.g., Volunteer, Organizer, Team Leader" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="dutyDate">Duty Date *</label>
-                        <input type="date" id="dutyDate" required>
-                    </div>
-                    <button type="submit" class="submit-btn">Add Attendee</button>
-                </form>
+        <div id="addAttendeeModal" class="modal" style="z-index: 2100;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>Add Attendee</h2>
+                    <span class="close" onclick="closeAddAttendeeModal()">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <form id="addAttendeeForm">
+                        <div class="form-group">
+                            <label for="attendeeName">Name *</label>
+                            <input type="text" id="attendeeName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="attendeeRole">Role *</label>
+                            <input type="text" id="attendeeRole" placeholder="e.g., Volunteer, Organizer" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dutyDate">Duty Date *</label>
+                            <input type="date" id="dutyDate" required>
+                        </div>
+                        <button type="submit" class="submit-btn">Add Attendee</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-    </div>
 
+        <div id="attendeeListModal" class="modal">
+            <div class="modal-content large-modal">
+                <div class="modal-header">
+                    <h2 id="modalEventTitle">Event Attendees</h2>
+                    <span class="close" onclick="closeAttendeeListModal()">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div class="list-controls">
+                        <p id="attendeeCountDisplay">0 Attendees</p>
+                        <button class="add-attendee-btn" id="modalAddBtn">
+                            <i class="fas fa-plus"></i> Add Attendee
+                        </button>
+                    </div>
+                    <ul id="modalAttendeeList" class="attendee-list-popup"></ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
     <script type="module" src="attendance.js"></script>
+    <script type="module" src="logout.js"></script>
 </body>
 </html>

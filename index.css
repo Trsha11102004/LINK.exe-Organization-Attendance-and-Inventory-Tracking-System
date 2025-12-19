@@ -24,6 +24,16 @@ body {
 /* =========================================
    2. Navigation Bar
    ========================================= */
+.logo {
+    width: 60px;
+    height: 60px;
+    background-image: url('Images/LINK.exe\ Logo_Secondary\ White.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-left: 60px;
+    background-position: center;
+}
+
 .nav-bar {
     display: flex;
     justify-content: space-between;
@@ -35,16 +45,6 @@ body {
     left: 0;
     right: 0;
     gap: 16px;
-}
-
-.logo {
-    width: 60px;
-    height: 60px;
-    background-image: url('Images/LINK.exe\ Logo_Secondary\ White.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    margin-left: 60px;
-    background-position: center;
 }
 
 .nav-links {
@@ -77,7 +77,12 @@ body {
     text-align: center;
 }
 
-.nav-links a:hover,
+.nav-links a:hover {
+    background: #ffffff;
+    color: #06c6df;
+    border-radius: 50px;
+}
+
 .nav-links a.active {
     background: #03508c;
     color: #fff;
@@ -97,8 +102,8 @@ body {
 }
 
 .logout-btn:hover {
-    background: #03508c;
-    color: #fff;
+    background: #ffffff;
+    color: #06c6df;
     border-radius: 50px;
 }
 
@@ -374,8 +379,9 @@ body {
 
 .team-wrapper {
     display: flex;
-    gap: 0px;
     margin-top: 40px;
+    gap: 5px;
+    justify-content: center;
 }
 
 .team-card {

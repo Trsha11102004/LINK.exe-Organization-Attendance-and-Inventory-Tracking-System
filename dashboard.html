@@ -4,11 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - LINK.exe</title>
-    
     <link rel="stylesheet" href="dashboard.css">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
     <script type="module" src="auth-guard.js" defer></script>
 </head>
   
@@ -25,10 +22,9 @@
             <li><a href="reports.html">Reports</a></li>
           </ul>
         </div>
-
-        <button class="logout-btn" onclick="alert('Logout functionality')">
-            <i class="fas fa-sign-out-alt"></i> Logout
-        </button>
+        <button class="logout-btn" onclick="handleLogout()">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
     </nav>
 
     <div class="dashboard-container">

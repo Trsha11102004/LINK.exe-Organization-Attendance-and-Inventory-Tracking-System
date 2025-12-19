@@ -37,7 +37,6 @@ onAuthStateChanged(auth, (user) => {
             "attendance.html", 
             "equipments inventory.html", 
             "reports.html", 
-            "members.html"
         ];
 
         // If the current page is in our protected list, kick them out

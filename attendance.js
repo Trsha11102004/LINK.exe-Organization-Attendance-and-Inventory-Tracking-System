@@ -1,17 +1,10 @@
-// 1. Import Firebase SDKs
+// 1. IMPORTS
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import { 
-    getFirestore, 
-    collection, 
-    addDoc, 
-    deleteDoc, 
-    doc, 
-    onSnapshot, 
-    query, 
-    orderBy 
+    getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot, query, orderBy 
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
-// 2. Firebase Configuration
+// 2. CONFIG
 const firebaseConfig = {
     apiKey: "AIzaSyBzCn2-2Oz-z5ucnUGXsBThEmNMxEv4I_U",
     authDomain: "linkexesystembackend.firebaseapp.com",
@@ -23,12 +16,11 @@ const firebaseConfig = {
     measurementId: "G-CF9WCNV3QP"
 };
 
-// 3. Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// Data storage (Local Sync)
-let localEvents = []; 
+// STATE
+let localEvents = [];
 let currentEventId = null;
 let currentFilter = 'all';
 
@@ -40,164 +32,55 @@ const pillarColors = {
 };
 
 // ==========================================
-// 4. REAL-TIME LISTENER (The Sync Engine)
+// 3. LISTENERS
 // ==========================================
 const q = query(collection(db, "events"), orderBy("createdAt", "desc"));
 
-// Listen for EVENTS
 onSnapshot(q, (snapshot) => {
     localEvents = [];
     snapshot.forEach((doc) => {
-        // Push event to local list
         localEvents.push({
             id: doc.id,
             ...doc.data(),
-            attendees: [] // Start empty, filled by sub-listener below
+            attendees: [] 
         });
-
-        // Trigger listener for this specific event's ATTENDEES
         listenToAttendees(doc.id);
     });
-    
-    // If no events, render immediately
     if (snapshot.empty) renderAll();
-}, (error) => {
-    console.error("Database connection error:", error);
-});
+}, (error) => console.error(error));
 
-// Listen for ATTENDEES (Sub-collection)
 function listenToAttendees(eventId) {
     const attendeesRef = collection(db, "events", eventId, "attendees");
     
     onSnapshot(attendeesRef, (snapshot) => {
-        // Find the event in our local list
         const eventIndex = localEvents.findIndex(e => e.id === eventId);
         if (eventIndex === -1) return;
 
-        // Map the attendees
         const attendeesList = [];
         snapshot.forEach(doc => {
-            attendeesList.push({
-                id: doc.id,
-                ...doc.data()
-            });
+            attendeesList.push({ id: doc.id, ...doc.data() });
         });
 
-        // Update local data and Refresh UI
+        // Update Data
         localEvents[eventIndex].attendees = attendeesList;
+        
+        // Update UI
         renderAll();
+
+        // REAL-TIME UPDATE FOR MODAL:
+        const listModal = document.getElementById('attendeeListModal');
+        if (listModal.style.display === 'block' && currentEventId === eventId) {
+            renderModalList(attendeesList, eventId);
+            document.getElementById('attendeeCountDisplay').innerText = `${attendeesList.length} Attendees`;
+        }
     });
 }
 
 // ==========================================
-// 5. ADD ATTENDEE (Database Write)
-// ==========================================
-window.addAttendee = async function(e) {
-    e.preventDefault();
-
-    if (!currentEventId) {
-        alert("Error: No event selected.");
-        return;
-    }
-
-    // 1. Get the button and change text to "Saving..."
-    const btn = document.querySelector('#addAttendeeForm .submit-btn');
-    const originalText = btn.innerText;
-    btn.innerText = "Saving...";
-    btn.disabled = true;
-
-    // 2. Prepare Data
-    const newAttendeeData = {
-        name: document.getElementById('attendeeName').value,
-        role: document.getElementById('attendeeRole').value,
-        dutyDate: document.getElementById('dutyDate').value
-    };
-
-    try {
-        // 3. Send to Firestore Sub-collection
-        // Path: events -> [Event ID] -> attendees -> [New ID]
-        await addDoc(collection(db, "events", currentEventId, "attendees"), newAttendeeData);
-        
-        console.log("Attendee saved to database successfully!");
-        closeAddAttendeeModal();
-        
-    } catch (error) {
-        console.error("Error adding attendee:", error);
-        alert("Failed to save to database: " + error.message);
-    } finally {
-        // 4. Reset Button
-        btn.innerText = originalText;
-        btn.disabled = false;
-    }
-}
-
-// ==========================================
-// 6. ADD EVENT (Database Write)
-// ==========================================
-window.addEvent = async function(e) {
-    e.preventDefault();
-    
-    const btn = document.querySelector('#addEventForm .submit-btn');
-    const originalText = btn.innerText;
-    btn.innerText = "Creating...";
-    btn.disabled = true;
-
-    const multiDay = document.getElementById('multiDayEvent').checked;
-    let startDate = multiDay ? document.getElementById('eventStartDate').value : document.getElementById('eventDate').value;
-    let endDate = multiDay ? document.getElementById('eventEndDate').value : startDate;
-
-    const newEventData = {
-        name: document.getElementById('eventName').value,
-        pillar: document.getElementById('eventPillar').value,
-        startDate: startDate,
-        endDate: endDate,
-        isMultiDay: multiDay,
-        createdAt: new Date()
-    };
-
-    try {
-        await addDoc(collection(db, "events"), newEventData);
-        closeAddEventModal();
-    } catch (error) {
-        console.error("Error adding event:", error);
-        alert("Error: " + error.message);
-    } finally {
-        btn.innerText = originalText;
-        btn.disabled = false;
-    }
-}
-
-// ==========================================
-// 7. DELETE FUNCTIONS
-// ==========================================
-window.deleteEvent = async function(eventId) {
-    if (!confirm('Are you sure you want to delete this event?')) return;
-    try {
-        await deleteDoc(doc(db, "events", eventId));
-    } catch (error) {
-        console.error("Error deleting event:", error);
-    }
-}
-
-window.deleteAttendee = async function(eventId, attendeeId) {
-    if (!confirm('Remove this attendee?')) return;
-    try {
-        await deleteDoc(doc(db, "events", eventId, "attendees", attendeeId));
-    } catch (error) {
-        console.error("Error deleting attendee:", error);
-    }
-}
-
-// ==========================================
-// 8. RENDER & UI LOGIC
+// 4. RENDERING UI
 // ==========================================
 function formatDate(dateInput) {
     if (!dateInput) return '';
-    // Handle Firestore Timestamp
-    if (dateInput && typeof dateInput.toDate === 'function') {
-        return dateInput.toDate().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-    }
-    // Handle String YYYY-MM-DD
     return new Date(dateInput).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 }
 
@@ -212,8 +95,8 @@ function renderEventCards(filterPillar = 'all') {
 
     grid.innerHTML = filteredEvents.map(event => `
         <div class="event-container">
-            <div class="event-header" style="border-left-color: ${pillarColors[event.pillar]};">
-                <div class="event-header-content" onclick="toggleEvent('${event.id}')">
+            <div class="event-header" style="border-left-color: ${pillarColors[event.pillar]}; cursor: default;">
+                <div class="event-header-content">
                     <div class="event-title">${event.name}</div>
                     <span class="pillar-badge" style="background: ${pillarColors[event.pillar]};">${event.pillar}</span>
                     <p class="event-date">
@@ -225,27 +108,13 @@ function renderEventCards(filterPillar = 'all') {
                     </p>
                 </div>
                 <div class="event-actions">
-                    <button class="delete-event-btn" onclick="deleteEvent('${event.id}'); event.stopPropagation();"><i class="fas fa-trash"></i></button>
+                     <button class="btn-see-list" onclick="openAttendeeListModal('${event.id}')">
+                        <i class="fas fa-list-ul"></i> List
+                     </button>
+                     <button class="delete-event-btn" onclick="deleteEvent('${event.id}')" title="Delete Event">
+                        <i class="fas fa-trash"></i>
+                     </button>
                 </div>
-            </div>
-            <div class="event-content" id="event-${event.id}">
-                ${!event.attendees || event.attendees.length === 0 ? 
-                    `<div class="empty-state"><p style="font-size: 0.9em;">No attendees yet.</p></div>` : 
-                    `<ul class="attendee-list">
-                        ${event.attendees.map(attendee => `
-                            <li class="attendee-item">
-                                <div class="attendee-info">
-                                    <div class="attendee-name">${attendee.name}</div>
-                                    <div class="attendee-details">${formatDate(attendee.dutyDate)} | ${attendee.role}</div>
-                                </div>
-                                <button class="delete-btn" onclick="deleteAttendee('${event.id}', '${attendee.id}')"><i class="fas fa-trash"></i></button>
-                            </li>
-                        `).join('')}
-                    </ul>`
-                }
-                <button class="add-attendee-btn" onclick="openAddAttendeeModal('${event.id}')">
-                    <i class="fas fa-plus"></i> Add Attendee
-                </button>
             </div>
         </div>
     `).join('');
@@ -286,13 +155,123 @@ function renderAll() {
 }
 
 // ==========================================
-// 9. MODALS & UTILITIES
+// 5. ATTENDEE LIST POPUP LOGIC
 // ==========================================
-window.toggleEvent = function(eventId) {
-    const content = document.getElementById(`event-${eventId}`);
-    if(content) content.classList.toggle('active');
+window.openAttendeeListModal = function(eventId) {
+    const event = localEvents.find(e => e.id === eventId);
+    if (!event) return;
+
+    currentEventId = eventId; 
+
+    // Update Header
+    document.getElementById('modalEventTitle').innerText = `${event.name} - Attendees`;
+    document.getElementById('attendeeCountDisplay').innerText = `${event.attendees ? event.attendees.length : 0} Attendees`;
+
+    // Setup Add Button
+    document.getElementById('modalAddBtn').onclick = function() {
+        openAddAttendeeModal(eventId);
+    };
+
+    // Render List
+    renderModalList(event.attendees, eventId);
+
+    // Show
+    document.getElementById('attendeeListModal').style.display = 'block';
 }
 
+function renderModalList(attendees, eventId) {
+    const listContainer = document.getElementById('modalAttendeeList');
+    
+    if (!attendees || attendees.length === 0) {
+        listContainer.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-users" style="font-size: 2em; color: #ddd;"></i>
+                <p>No attendees yet.</p>
+            </div>`;
+        return;
+    }
+
+    listContainer.innerHTML = attendees.map(attendee => `
+        <li class="attendee-item">
+            <div class="attendee-info">
+                <div class="attendee-name">${attendee.name}</div>
+                <div class="attendee-details">
+                    ${formatDate(attendee.dutyDate)} | ${attendee.role}
+                </div>
+            </div>
+            <button class="delete-btn" onclick="deleteAttendee('${eventId}', '${attendee.id}')" title="Remove">
+                <i class="fas fa-trash"></i>
+            </button>
+        </li>
+    `).join('');
+}
+
+window.closeAttendeeListModal = function() {
+    document.getElementById('attendeeListModal').style.display = 'none';
+}
+
+// ==========================================
+// 6. CRUD ACTIONS
+// ==========================================
+window.addEvent = async function(e) {
+    e.preventDefault();
+    const btn = document.querySelector('#addEventForm .submit-btn');
+    btn.innerText = "Creating..."; btn.disabled = true;
+
+    const multiDay = document.getElementById('multiDayEvent').checked;
+    let startDate = multiDay ? document.getElementById('eventStartDate').value : document.getElementById('eventDate').value;
+    let endDate = multiDay ? document.getElementById('eventEndDate').value : startDate;
+
+    try {
+        await addDoc(collection(db, "events"), {
+            name: document.getElementById('eventName').value,
+            pillar: document.getElementById('eventPillar').value,
+            startDate, endDate, isMultiDay: multiDay, createdAt: new Date()
+        });
+        closeAddEventModal();
+    } catch (error) {
+        alert("Error: " + error.message);
+    } finally {
+        btn.innerText = "Create Event"; btn.disabled = false;
+    }
+}
+
+window.addAttendee = async function(e) {
+    e.preventDefault();
+    if (!currentEventId) return;
+
+    const btn = document.querySelector('#addAttendeeForm .submit-btn');
+    btn.innerText = "Saving..."; btn.disabled = true;
+
+    try {
+        await addDoc(collection(db, "events", currentEventId, "attendees"), {
+            name: document.getElementById('attendeeName').value,
+            role: document.getElementById('attendeeRole').value,
+            dutyDate: document.getElementById('dutyDate').value
+        });
+        closeAddAttendeeModal();
+    } catch (error) {
+        alert("Error: " + error.message);
+    } finally {
+        btn.innerText = "Add Attendee"; btn.disabled = false;
+    }
+}
+
+window.deleteEvent = async function(eventId) {
+    if (!confirm('Delete this event?')) return;
+    try { await deleteDoc(doc(db, "events", eventId)); } 
+    catch (error) { console.error(error); }
+}
+
+window.deleteAttendee = async function(eventId, attendeeId) {
+    if (!confirm('Remove this attendee?')) return;
+    try { await deleteDoc(doc(db, "events", eventId, "attendees", attendeeId)); }
+    catch (error) { console.error(error); }
+}
+
+// ==========================================
+// 7. UTILS
+// ==========================================
 window.filterEvents = function(pillar) {
     currentFilter = pillar;
     document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -302,38 +281,24 @@ window.filterEvents = function(pillar) {
     renderEventCards(pillar);
 }
 
-window.openAddEventModal = function() { document.getElementById('addEventModal').style.display = 'block'; }
-window.closeAddEventModal = function() { 
-    document.getElementById('addEventModal').style.display = 'none'; 
-    document.getElementById('addEventForm').reset();
-}
+window.openAddEventModal = () => document.getElementById('addEventModal').style.display = 'block';
+window.closeAddEventModal = () => { document.getElementById('addEventModal').style.display = 'none'; document.getElementById('addEventForm').reset(); }
 
-window.openAddAttendeeModal = function(eventId) {
-    currentEventId = eventId;
+window.openAddAttendeeModal = (eventId) => {
+    if(eventId) currentEventId = eventId; 
     document.getElementById('addAttendeeModal').style.display = 'block';
 }
-window.closeAddAttendeeModal = function() {
-    document.getElementById('addAttendeeModal').style.display = 'none';
-    document.getElementById('addAttendeeForm').reset();
-    currentEventId = null;
+window.closeAddAttendeeModal = () => { document.getElementById('addAttendeeModal').style.display = 'none'; document.getElementById('addAttendeeForm').reset(); }
+
+window.toggleDateRange = () => {
+    const chk = document.getElementById('multiDayEvent');
+    document.getElementById('singleDate').style.display = chk.checked ? 'none' : 'block';
+    document.getElementById('dateRange').style.display = chk.checked ? 'block' : 'none';
 }
 
-window.toggleDateRange = function() {
-    const checkbox = document.getElementById('multiDayEvent');
-    if (checkbox.checked) {
-        document.getElementById('singleDate').style.display = 'none';
-        document.getElementById('dateRange').style.display = 'block';
-    } else {
-        document.getElementById('singleDate').style.display = 'block';
-        document.getElementById('dateRange').style.display = 'none';
-    }
-}
-
-// Close modals on outside click
 window.onclick = function(event) {
     if (event.target.classList.contains('modal')) event.target.style.display = 'none';
 }
 
-// Attach listeners
 document.getElementById('addEventForm').onsubmit = window.addEvent;
 document.getElementById('addAttendeeForm').onsubmit = window.addAttendee;

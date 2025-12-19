@@ -19,7 +19,7 @@
             <li><a href="reports.html" class="active">Reports</a></li>
           </ul>
         </div>
-        <button class="logout-btn" onclick="alert('Logout functionality')">
+        <button class="logout-btn" onclick="handleLogout()">
             <i class="fas fa-sign-out-alt"></i> Logout
         </button>
     </nav>
@@ -74,16 +74,20 @@
                 </table>
             </div>
         </section>
-
-        <section class="report-section no-bg">
+        
+        <div class="report-section">
             <div class="section-header">
                 <h2><i class="fas fa-chart-pie"></i> Pillar Performance Overview</h2>
             </div>
+        </div>
+
+        <section class="bottom-section">
             <div id="pillarReportCards" class="pillar-grid">
                 </div>
         </section>
     </div>
 
     <script type="module" src="reports.js"></script>
+    <script type="module" src="logout.js"></script>
 </body>
 </html>
