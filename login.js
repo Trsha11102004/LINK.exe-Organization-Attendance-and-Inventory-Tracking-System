@@ -53,12 +53,11 @@ if (loginForm) {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 alert("Account Successfully Logged In!");
-                window.location.href = "dashboard.html";
+                window.location.href = "index.html";
             })
             .catch((error) => {
                 let message = "Login Failed";
-                // ... (Keep your existing error handling here) ...
-                alert(error.message); // Simplified for brevity
+                alert("Login failed. Invalid email or password."); // Simplified for brevity
                 loginBtn.textContent = "Login";
                 loginBtn.disabled = false;
             });
