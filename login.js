@@ -1,11 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { 
-    getAuth, 
-    signInWithEmailAndPassword, 
-    sendPasswordResetEmail 
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { getAuth, signInWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-// 1. Firebase Configuration
 const firebaseConfig = {
     apiKey: "AIzaSyBzCn2-2Oz-z5ucnUGXsBThEmNMxEv4I_U",
     authDomain: "linkexesystembackend.firebaseapp.com",
@@ -20,9 +15,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// ==========================================
-// 2. PASSWORD TOGGLE LOGIC
-// ==========================================
+// Toggle Password Visibility
 const togglePassword = document.getElementById('togglePassword');
 const passwordInput = document.getElementById('enterpassword');
 
@@ -34,15 +27,13 @@ if (togglePassword && passwordInput) {
     });
 }
 
-// ==========================================
-// 3. LOGIN LOGIC
-// ==========================================
+// Login Logic
 const loginForm = document.getElementById('loginForm');
 const loginBtn = document.getElementById('btn-login');
 
 if (loginForm) {
     loginForm.addEventListener("submit", (event) => {
-        event.preventDefault(); 
+        event.preventDefault();
 
         const email = document.getElementById('enteremail').value;
         const password = document.getElementById('enterpassword').value;
@@ -51,44 +42,37 @@ if (loginForm) {
         loginBtn.disabled = true;
 
         signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
+            .then(() => {
                 alert("Account Successfully Logged In!");
                 window.location.href = "index.html";
             })
-            .catch((error) => {
-                let message = "Login Failed";
-                alert("Login failed. Invalid email or password."); // Simplified for brevity
+            .catch(() => {
+                alert("Login failed. Invalid email or password.");
                 loginBtn.textContent = "Login";
                 loginBtn.disabled = false;
             });
     });
 }
 
-// ==========================================
-// 4. DIRECT FORGOT PASSWORD LOGIC (Updated)
-// ==========================================
+// Forgot Password Logic
 const forgotBtn = document.getElementById('forgotPasswordBtn');
 
 forgotBtn.addEventListener('click', (e) => {
     e.preventDefault();
-    
-    // 1. Get the email directly from the Login Input field
+
     const emailInput = document.getElementById('enteremail');
     const email = emailInput.value.trim();
 
-    // 2. Validation: Ensure they actually typed something
     if (!email) {
         alert("Please enter your email address in the Email field first.");
-        emailInput.focus(); // Highlights the box so they know where to type
+        emailInput.focus();
         return;
     }
 
-    // 3. Optional: Confirmation
     if (!confirm(`Send password reset link to: ${email}?`)) {
         return;
     }
 
-    // 4. Send the reset email
     sendPasswordResetEmail(auth, email)
         .then(() => {
             alert(`Password reset link sent to ${email}. Please check your inbox.`);

@@ -15,7 +15,6 @@ const db = getFirestore(app);
 
 const pillarColors = { 'Extensions': '#03508C', 'Training': '#4CBBDE', 'Programs': '#9FDCE0', 'IGP': '#667eea' };
 
-// --- DATA LISTENERS ---
 let allEvents = [];
 
 onSnapshot(collection(db, "events"), (snapshot) => {
@@ -44,8 +43,6 @@ onSnapshot(collection(db, "equipment"), (snapshot) => {
         </tr>
     `).join('');
 });
-
-// --- RENDER LOGIC ---
 
 function renderAttendanceReport() {
     const tbody = document.getElementById('attendanceTableBody');

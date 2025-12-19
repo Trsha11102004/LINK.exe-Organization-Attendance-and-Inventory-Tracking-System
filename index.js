@@ -1,14 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
-    
+
     // 1. FOOTER BACKGROUND SCROLL EFFECT
     document.addEventListener("scroll", function () {
         const footer = document.querySelector("footer");
         if (footer) {
             const rect = footer.getBoundingClientRect();
             if (rect.top < window.innerHeight) {
-                footer.style.background = "rgba(255, 255, 255, 0.85)"; // solid
+                footer.style.background = "rgba(255, 255, 255, 0.85)";
             } else {
-                footer.style.background = "rgba(255, 255, 255, 0.2)"; // transparent
+                footer.style.background = "rgba(255, 255, 255, 0.2)";
             }
         }
     });
@@ -41,16 +41,16 @@ document.addEventListener("DOMContentLoaded", () => {
         function nextSlide() {
             slides[currentIndex].classList.remove('active');
             dots[currentIndex].classList.remove('active');
-            
+
             currentIndex = (currentIndex + 1) % slides.length;
-            
+
             slides[currentIndex].classList.add('active');
             dots[currentIndex].classList.add('active');
         }
         setInterval(nextSlide, slideInterval);
     }
 
-    // 4. PILLAR HOVER EFFECTS (Link to Card)
+    // 4. PILLAR HOVER EFFECTS
     const texts = document.querySelectorAll('.pillar-link');
     texts.forEach(text => {
         const targetId = text.getAttribute('data-target');
@@ -68,15 +68,4 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         }
     });
-
-    // 5. SCROLL TO FOOTER (Optional ID check)
-    const aboutUsBtn = document.getElementById("aboutUsBtn");
-    if (aboutUsBtn) {
-        aboutUsBtn.addEventListener("click", () => {
-            document.querySelector("footer").scrollIntoView({
-                behavior: "smooth",
-                block: "start"
-            });
-        });
-    }
 });

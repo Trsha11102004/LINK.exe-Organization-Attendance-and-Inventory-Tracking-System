@@ -1,17 +1,9 @@
-// 1. CONFIGURATION & IMPORTS
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { 
-    getFirestore, 
-    collection, 
-    addDoc, 
-    onSnapshot, 
-    doc, 
-    updateDoc, 
-    deleteDoc, 
-    deleteField, 
-    serverTimestamp 
+    getFirestore, collection, addDoc, onSnapshot, doc, updateDoc, deleteDoc, deleteField, serverTimestamp 
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
+// 1. CONFIGURATION
 const firebaseConfig = {
     apiKey: "AIzaSyBzCn2-2Oz-z5ucnUGXsBThEmNMxEv4I_U",
     authDomain: "linkexesystembackend.firebaseapp.com",
@@ -27,15 +19,12 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const equipmentCollection = collection(db, "equipment");
 
-// Global State
+// GLOBAL STATE
 let localEquipmentList = [];
-let borrowedView = true; // UPDATED: Default is visible (True)
+let borrowedView = true;
 let editMode = false;
 let currentEditId = null;
 
-// ==========================================
-// 2. REAL-TIME LISTENER
-// ==========================================
 onSnapshot(equipmentCollection, (snapshot) => {
     localEquipmentList = [];
     snapshot.docs.forEach((doc) => {
@@ -45,16 +34,11 @@ onSnapshot(equipmentCollection, (snapshot) => {
         });
     });
     
-    // Refresh both tables immediately
     renderTable(); 
     renderBorrowedList(); 
 });
 
-// ==========================================
-// 3. UI RENDERING
-// ==========================================
-
-// Renders the main inventory table
+// Render Main Table
 window.renderTable = function() {
     const tbody = document.getElementById('tableBody');
     
@@ -90,11 +74,9 @@ window.renderTable = function() {
     `).join('');
 }
 
-// Renders the "Currently Borrowed" section
+// Render Borrowed List
 window.renderBorrowedList = function() {
     const list = document.getElementById('borrowedList');
-    
-    // FILTER: Only show items where status is 'borrowed'
     const borrowed = localEquipmentList.filter(item => item.status === 'borrowed');
     
     if (borrowed.length === 0) {
@@ -135,11 +117,7 @@ function formatDate(dateStr) {
     return new Date(dateStr).toLocaleDateString('en-US', options);
 }
 
-// ==========================================
-// 4. DATABASE ACTIONS (C.R.U.D)
-// ==========================================
-
-// ADD / EDIT Equipment
+// Save Equipment
 window.saveEquipment = async function(e) {
     e.preventDefault();
     const name = document.getElementById('equipmentName').value;
@@ -152,11 +130,9 @@ window.saveEquipment = async function(e) {
 
     try {
         if (editMode && id) {
-            // Update existing document
             const itemRef = doc(db, "equipment", id);
             await updateDoc(itemRef, { name, owner });
         } else {
-            // Create new document (State A)
             await addDoc(equipmentCollection, {
                 name,
                 owner,
@@ -174,12 +150,11 @@ window.saveEquipment = async function(e) {
     }
 }
 
-// BORROW Equipment
+// Borrow Equipment
 window.borrowEquipment = async function(e) {
     e.preventDefault();
     const itemId = document.getElementById('borrowEquipmentId').value;
     
-    // 1. Prepare data for the Main Document (State B)
     const borrowData = {
         status: 'borrowed',
         borrower: document.getElementById('borrowerName').value,
@@ -192,17 +167,12 @@ window.borrowEquipment = async function(e) {
 
     try {
         const itemRef = doc(db, "equipment", itemId);
-        
-        // 2. Update the Equipment Document
         await updateDoc(itemRef, borrowData);
-
-        // 3. Create a History Log (Subcollection)
         await addDoc(collection(db, "equipment", itemId, "history"), {
             action: "borrow",
             ...borrowData,
             timestamp: serverTimestamp()
         });
-
         closeBorrowModal();
     } catch (error) {
         console.error("Error borrowing:", error);
@@ -210,21 +180,19 @@ window.borrowEquipment = async function(e) {
     }
 }
 
-// RETURN Equipment
+// Return Equipment
 window.returnEquipment = async function(itemId) {
     if (confirm('Mark this equipment as returned?')) {
         try {
             const itemRef = doc(db, "equipment", itemId);
             const item = localEquipmentList.find(eq => eq.id === itemId);
 
-            // 1. Create a Return Log (Subcollection)
             await addDoc(collection(db, "equipment", itemId, "history"), {
                 action: "return",
                 returnedBy: item.borrower,
                 timestamp: serverTimestamp()
             });
 
-            // 2. Clean the Equipment Document (Revert to State A)
             await updateDoc(itemRef, {
                 status: 'available',
                 borrowedDate: null,
@@ -240,7 +208,7 @@ window.returnEquipment = async function(itemId) {
     }
 }
 
-// DELETE Equipment
+// Delete Equipment
 window.deleteEquipment = async function(itemId) {
     const item = localEquipmentList.find(eq => eq.id === itemId);
     
@@ -258,9 +226,6 @@ window.deleteEquipment = async function(itemId) {
     }
 }
 
-// ==========================================
-// 5. MODAL LOGIC
-// ==========================================
 window.openAddEquipmentModal = function() {
     editMode = false;
     currentEditId = null;
@@ -303,18 +268,15 @@ window.closeBorrowModal = function() {
     document.getElementById('borrowForm').reset();
 }
 
-// UPDATED: TOGGLE LOGIC (Flipped)
 window.toggleBorrowedView = function() {
     borrowedView = !borrowedView;
     const section = document.getElementById('borrowedSection');
     const btn = document.querySelector('.btn-secondary');
     
     if (borrowedView) {
-        // Show the list
         section.style.display = 'block';
         btn.innerHTML = '<i class="fas fa-list"></i> Hide Borrowed';
     } else {
-        // Hide the list
         section.style.display = 'none';
         btn.innerHTML = '<i class="fas fa-list"></i> View Borrowed';
     }

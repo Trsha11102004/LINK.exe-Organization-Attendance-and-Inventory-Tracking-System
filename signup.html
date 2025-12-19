@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Account | LINK.exe</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="signup.css">
     <script type="module" src="signup.js" defer></script>
 </head>
 <body>
@@ -14,7 +14,6 @@
                 <h1>JOIN US!</h1>
                 <p>Upholding Excellence, serving the community</p>
             </div>
-
             <div class="mascot-container">
                 <div class="slanting-oval"></div>
                 <img src="Images/Lex.png" class="mascot" alt="Mascot">
@@ -26,18 +25,18 @@
                 <h2>SIGN UP</h2>
                 <p class="subtitle">Create your account to get started</p>
                 
-                <form>
+                <form id="signupForm">
                     <div class="input-row">
                         <div class="input-group">
                             <input type="text" placeholder="Full Name" id="fullname" required>
                         </div>
                         <div class="input-group">
-                            <input type="text" placeholder="Email" id="email" required>
+                            <input type="email" placeholder="Email" id="email" required>
                         </div>
                     </div>
 
                     <div class="input-group">
-                        <input type="text" placeholder="Cellphone Number (Personal)" id="cellnumber" required>
+                        <input type="tel" placeholder="Cellphone Number (Personal)" id="cellnumber" required>
                     </div>
 
                     <div class="input-group">
@@ -53,9 +52,9 @@
                         <input type="password" placeholder="Create Password" id="password" required>
                     </div>
 
-                    <button type="submit" class="btn-login" id="btn-login">Create Account</button>
+                    <button type="submit" class="btn-login" id="btn-signup">Create Account</button>
                     <button type="button" class="btn-cancel" onclick="window.location.href='login.html'">Cancel</button>
-
+                </form>
 
                 <p class="signup-text">Already have an account? <a href="login.html">Login</a></p>
             </div>

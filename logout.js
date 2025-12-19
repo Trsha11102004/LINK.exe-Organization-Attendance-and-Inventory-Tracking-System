@@ -1,6 +1,3 @@
-// ==========================================
-// 1. IMPORTS & CONFIGURATION
-// ==========================================
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
@@ -19,16 +16,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
-// ==========================================
-// 2. AUTH GUARD (Security Check)
-// ==========================================
-// This listener runs automatically when the page loads
 onAuthStateChanged(auth, (user) => {
-    if (!user) {
-        // SECURITY CHECK:
-        // We only want to redirect IF the user is currently on a protected page.
-        // We do NOT want to redirect if they are already on 'landing.html' or 'login.html'
-        
+    if (!user) {        
         const currentPage = window.location.pathname;
         
         // List of pages that require login
@@ -52,10 +41,7 @@ onAuthStateChanged(auth, (user) => {
     }
 });
 
-// ==========================================
-// 3. LOGOUT FUNCTION
-// ==========================================
-// Attached to window so your HTML buttons can see it
+// Logout Function
 window.handleLogout = async function() {
     if (confirm("Are you sure you want to logout?")) {
         try {

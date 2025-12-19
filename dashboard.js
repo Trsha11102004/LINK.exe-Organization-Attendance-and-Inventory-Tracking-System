@@ -35,9 +35,6 @@ const activityLists = document.querySelectorAll('.activity-list');
 const eventActivityList = activityLists[0];
 const equipmentActivityList = activityLists[1];
 
-// =======================================================
-// 3. EQUIPMENT LOGIC (Real-time Stats & Logs)
-// =======================================================
 const equipmentCol = collection(db, "equipment");
 
 onSnapshot(equipmentCol, (snapshot) => {
@@ -85,22 +82,14 @@ function renderEquipmentLogs(items) {
     `).join('');
 }
 
-// =======================================================
-// 4. EVENTS & MEMBERS LOGIC (Real-time Stats)
-// =======================================================
-
 // A. Real-time Listener for ALL Events
-// This calculates "Total Events" and "Active Members" (Unique attendees across all events)
 onSnapshot(collection(db, "events"), async (snapshot) => {
     // 1. Update Total Events Count
     const currentTotalEvents = snapshot.size;
     animateValue(totalEventsEl, parseInt(totalEventsEl.innerText) || 0, currentTotalEvents, 1000);
 
     // 2. Calculate Total Unique Members
-    // We use a Set because Sets automatically remove duplicates
     const allMemberNames = new Set();
-
-    // Create an array of promises to fetch subcollections in parallel
     const promises = snapshot.docs.map(doc => getDocs(collection(db, "events", doc.id, "attendees")));
     
     try {
@@ -110,13 +99,11 @@ onSnapshot(collection(db, "events"), async (snapshot) => {
             attendeeSnap.forEach(attendeeDoc => {
                 const name = attendeeDoc.data().name;
                 if (name) {
-                    // Normalize name (trim spaces, lowercase) to strictly identify unique people
                     allMemberNames.add(name.trim().toLowerCase());
                 }
             });
         });
 
-        // Update Member Stat Card with the unique count
         animateValue(totalMembersEl, parseInt(totalMembersEl.innerText) || 0, allMemberNames.size, 1000);
     } catch (err) {
         console.error("Error calculating members:", err);
@@ -129,20 +116,15 @@ onSnapshot(collection(db, "events"), async (snapshot) => {
 const qEvents = query(collection(db, "events"), orderBy("createdAt", "desc"), limit(5));
 
 onSnapshot(qEvents, async (snapshot) => {
-    const eventDataList = [];
-
-    // Fetch attendee counts for the recent events to display in the list
     const promises = snapshot.docs.map(async (docSnapshot) => {
         const eventData = docSnapshot.data();
         const eventId = docSnapshot.id;
-
         const attendeesCol = collection(db, "events", eventId, "attendees");
         const attendeeSnap = await getDocs(attendeesCol);
         
         return {
             name: eventData.name,
             count: attendeeSnap.size,
-            // Fallback date if needed for sorting logic
             date: eventData.startDate 
         };
     });
@@ -165,10 +147,6 @@ function renderEventLogs(events) {
     `).join('');
 }
 
-// =======================================================
-// 5. UTILITIES
-// =======================================================
-
 // Number Counter Animation
 function animateValue(obj, start, end, duration) {
     if (!obj) return;
@@ -181,7 +159,7 @@ function animateValue(obj, start, end, duration) {
         if (progress < 1) {
             window.requestAnimationFrame(step);
         } else {
-            obj.innerHTML = end; // Ensure exact final number
+            obj.innerHTML = end;
         }
     };
     window.requestAnimationFrame(step);

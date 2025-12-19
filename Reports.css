@@ -1,6 +1,3 @@
-/* =========================================
-   1. GLOBAL & NAVIGATION
-   ========================================= */
 * {
     margin: 0;
     padding: 0;
@@ -16,19 +13,7 @@ body {
 .container {
     max-width: 1400px;
     margin: 0 auto;
-}
-
-/* =========================================
-   2. NAVIGATION BAR
-   ========================================= */
-.logo {
-    width: 60px;
-    height: 60px;
-    background-image: url('Images/LINK.exe\ Logo_Secondary\ White.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-    margin-left: 60px;
-    background-position: center;
+    padding: 20px;
 }
 
 .nav-bar {
@@ -42,6 +27,18 @@ body {
     left: 0;
     right: 0;
     gap: 16px;
+    padding: 0 16px;
+    height: 70px;
+}
+
+.logo {
+    width: 60px;
+    height: 60px;
+    background-image: url('Images/LINK.exe\ Logo_Secondary\ White.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 60px;
 }
 
 .nav-links {
@@ -61,29 +58,24 @@ body {
 }
 
 .nav-links ul li a {
-    -webkit-appearance: none;
-    appearance: none;
     color: #ffffff;
     padding: 10px 18px;
     text-decoration: none;
     font-weight: 600;
     font-size: 0.95em;
     display: inline-block;
-    border: none;
-    cursor: pointer;
-    text-align: center;
+    border-radius: 50px;
+    transition: 0.3s;
 }
 
 .nav-links a:hover {
     background: #ffffff;
     color: #06c6df;
-    border-radius: 50px;
 }
 
 .nav-links a.active {
     background: #03508c;
     color: #fff;
-    border-radius: 50px;
 }
 
 .logout-btn {
@@ -96,45 +88,58 @@ body {
     cursor: pointer;
     margin-right: 30px;
     margin-top: 10px;
+    border-radius: 50px;
+    transition: 0.3s;
 }
 
 .logout-btn:hover {
     background: #ffffff;
     color: #06c6df;
-    border-radius: 50px;
 }
 
 .logout-btn i {
     margin-right: 6px;
 }
 
-/* =========================================
-   2. REPORTS LAYOUT
-   ========================================= */
-.container {
-    max-width: 1300px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-header.report-header {
+.report-header {
     background: white;
     padding: 30px;
     border-radius: 15px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    margin-top: 100px;
+    margin-top: 90px;
     margin-bottom: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-header h1 { 
-    color: #03508C; font-size: 1.8em; margin-bottom: 5px; 
+.header-text h1 {
+    color: #03508C;
+    font-size: 1.8em;
+    margin-bottom: 5px;
 }
 
-header p { 
-    color: #666; font-size: 0.95em; 
+.header-text p {
+    color: #666;
+    font-size: 0.95em;
+}
+
+.btn-export {
+    background: #03508C;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-export:hover {
+    background: #024070;
 }
 
 .report-section {
@@ -145,24 +150,15 @@ header p {
     margin-bottom: 30px;
 }
 
-.report-section.no-bg {
-    background: transparent;
-    box-shadow: none;
-    padding-left: 0;
-    padding-right: 0;
-}
-
 .section-header h2 {
     color: #03508C;
     font-size: 1.4em;
     display: flex;
     align-items: center;
     gap: 10px;
+    margin-bottom: 20px;
 }
 
-/* =========================================
-   3. DATA TABLES & PROGRESS
-   ========================================= */
 .table-wrapper {
     overflow-x: auto;
     border: 1px solid #eee;
@@ -172,6 +168,7 @@ header p {
 table {
     width: 100%;
     border-collapse: collapse;
+    min-width: 600px;
 }
 
 th {
@@ -209,11 +206,28 @@ td {
     transition: width 0.5s ease-out;
 }
 
-.percentage { font-weight: 700; color: #03508C; font-size: 0.9em; }
+.percentage {
+    font-weight: 700;
+    color: #03508C;
+    font-size: 0.9em;
+}
 
-/* =========================================
-   4. PILLAR CARDS
-   ========================================= */
+.badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.badge-available { 
+    background: #d1fae5; color: #065f46; 
+}
+
+.badge-borrowed { 
+    background: #fee2e2; color: #991b1b; 
+}
+
 .pillar-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -224,12 +238,14 @@ td {
     background: white;
     padding: 25px;
     border-radius: 15px;
-    border-left: 6px solid #ccc;
+    border-left: 6px solid #ccc; 
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
     transition: transform 0.3s ease;
 }
 
-.report-card:hover { transform: translateY(-5px); }
+.report-card:hover {
+    transform: translateY(-5px);
+}
 
 .report-card-header {
     display: flex;
@@ -237,45 +253,40 @@ td {
     margin-bottom: 15px;
 }
 
-.card-title { font-weight: 700; color: #112653; font-size: 1.1em; }
-.card-value { font-size: 1.8em; font-weight: 800; }
-
-/* =========================================
-   5. BUTTONS & BADGES
-   ========================================= */
-.btn-export {
-    background: #03508C;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.btn-export:hover { background: #024070; }
-
-.badge {
-    padding: 5px 12px;
-    border-radius: 20px;
-    font-size: 0.8em;
+.card-title {
     font-weight: 700;
-    text-transform: uppercase;
+    color: #112653;
+    font-size: 1.1em;
 }
 
-.badge-available { background: #d1fae5; color: #065f46; }
-.badge-borrowed { background: #fee2e2; color: #991b1b; }
+.card-value {
+    font-size: 1.8em;
+    font-weight: 800;
+}
 
-@media print {
+@media print { 
     .nav-bar, .logout-btn, .btn-export { display: none !important; }
     body { background: white; }
-    header.report-header { margin-top: 0; box-shadow: none; border: 1px solid #eee; }
+    .container { margin: 0; padding: 0; max-width: 100%; }
+    header.report-header { margin-top: 0; box-shadow: none; border-bottom: 1px solid #eee; }
+    .report-card, .report-section { box-shadow: none; border: 1px solid #eee; break-inside: avoid; }
 }
 
-.report-section {
-    background: white;
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+@media (max-width: 768px) {
+    .nav-bar {
+        padding: 10px 15px;
+        flex-wrap: wrap;
+        height: auto;
+    }
+    
+    .report-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+        margin-top: 100px;
+    }
+
+    .table-wrapper {
+        overflow-x: scroll;
+    }
 }

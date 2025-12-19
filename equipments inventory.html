@@ -4,25 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Equipment Inventory System</title>
-    
     <link rel="stylesheet" href="equipments inventory.css">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <nav class="nav-bar">
         <div class="nav-links">
-          <div class="logo"></div>
-
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="dashboard.html">Dashboard</a></li>
-            <li><a href="attendance.html" >Attendance</a></li>
-            <li><a href="equipments inventory.html" class="active">Equipments</a></li>
-            <li><a href="reports.html">Reports</a></li>
-          </ul>
+            <div class="logo"></div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="attendance.html">Attendance</a></li>
+                <li><a href="equipments inventory.html" class="active">Equipments</a></li>
+                <li><a href="reports.html">Reports</a></li>
+            </ul>
         </div>
-        
         <button class="logout-btn" onclick="handleLogout()">
             <i class="fas fa-sign-out-alt"></i> Logout
         </button>
@@ -45,8 +41,7 @@
                             <th>Actions</th>
                         </tr>
                     </thead>
-                    <tbody id="tableBody">
-                        </tbody>
+                    <tbody id="tableBody"></tbody>
                 </table>
             </div>
         </div>
@@ -124,6 +119,24 @@
                     </div>
                     <button type="submit" class="submit-btn">Confirm Borrow</button>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="returnModal" class="modal">
+        <div class="modal-content" style="max-width: 400px;">
+            <div class="modal-header">
+                <h2>Confirm Return</h2>
+                <span class="close" onclick="closeReturnModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p style="margin-bottom: 20px; font-size: 1.1em; color: #333;">
+                    Are you sure you want to mark this item as returned?
+                </p>
+                <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                    <button class="btn btn-secondary" onclick="closeReturnModal()" style="padding: 10px 20px;">Cancel</button>
+                    <button class="btn return-btn" id="confirmReturnBtn" style="width: auto;">Yes, Return It</button>
+                </div>
             </div>
         </div>
     </div>

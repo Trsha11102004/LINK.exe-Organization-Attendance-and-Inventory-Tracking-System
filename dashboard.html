@@ -8,23 +8,22 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <script type="module" src="auth-guard.js" defer></script>
 </head>
-  
+
 <body>
     <nav class="nav-bar">
         <div class="nav-links">
-          <div class="logo"></div>
-
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="dashboard.html" class="active">Dashboard</a></li>
-            <li><a href="attendance.html">Attendance</a></li>
-            <li><a href="equipments inventory.html">Equipments</a></li>
-            <li><a href="reports.html">Reports</a></li>
-          </ul>
+            <div class="logo"></div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                <li><a href="attendance.html">Attendance</a></li>
+                <li><a href="equipments inventory.html">Equipments</a></li>
+                <li><a href="reports.html">Reports</a></li>
+            </ul>
         </div>
         <button class="logout-btn" onclick="handleLogout()">
-                <i class="fas fa-sign-out-alt"></i> Logout
-            </button>
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
     </nav>
 
     <div class="dashboard-container">
@@ -34,9 +33,10 @@
                 <div class="stat-icon blue">
                     <i class="fas fa-calendar-check"></i>
                 </div>
-                <div class="stat-value" id="totalEvents">5</div> 
+                <div class="stat-value" id="totalEvents">5</div>
                 <div class="stat-label">Total Events</div>
             </div>
+            
             <div class="stat-card">
                 <div class="stat-icon green">
                     <i class="fas fa-users"></i>
@@ -44,6 +44,7 @@
                 <div class="stat-value" id="totalMembers">45</div>
                 <div class="stat-label">Active Members</div>
             </div>
+            
             <div class="stat-card">
                 <div class="stat-icon orange">
                     <i class="fas fa-boxes"></i>
@@ -51,6 +52,7 @@
                 <div class="stat-value" id="totalEquipment">0</div>
                 <div class="stat-label">Total Equipment</div>
             </div>
+            
             <div class="stat-card">
                 <div class="stat-icon purple">
                     <i class="fas fa-hand-holding"></i>
@@ -90,7 +92,7 @@
                     </li>
                 </ul>
             </div>
-                    
+            
             <div class="activity-card">
                 <div class="activity-header">
                     <h2>Equipment Logs</h2>

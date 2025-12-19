@@ -1,7 +1,5 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-app.js";
-import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-auth.js";
-import { getAnalytics } from "https://www.gstatic.com/firebasejs/12.7.0/firebase-analytics.js";
-
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyBzCn2-2Oz-z5ucnUGXsBThEmNMxEv4I_U",
@@ -15,32 +13,51 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
 const auth = getAuth(app);
 
-//Submit Button
-const submit = document.getElementById('btn-login');
-submit.addEventListener("click", function (event) {
-    event.preventDefault()
+// Sign Up 
+const submitBtn = document.getElementById('btn-signup');  
 
-    //Input
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+const form = document.getElementById('signupForm'); 
 
+if (form) {
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
 
-    createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Signed up 
-            const user = userCredential.user;
-            alert("Account Created Successfully!")
-            window.location.href = "login.html";
-            // ...
-        })
-        .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            alert(errorMessage)
-            // ..
-        });
-})
+        // 1. Get Input Values
+        const fullName = document.getElementById('fullname').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const submitButton = document.getElementById('btn-signup');
+
+        // 2. Simple Validation
+        if (!email || !password || !fullName) {
+            alert("Please fill in all required fields.");
+            return;
+        }
+
+        // 3. UI Feedback
+        submitButton.textContent = "Creating Account...";
+        submitButton.disabled = true;
+
+        // 4. Create User in Firebase Auth
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Success
+                const user = userCredential.user;
+                alert("Account Created Successfully!");
+                // Redirect to login
+                window.location.href = "login.html";
+            })
+            .catch((error) => {
+                // Error Handling
+                console.error("Signup Error:", error);
+                const errorMessage = error.message;
+                alert(errorMessage);
+                
+                // Reset Button
+                submitButton.textContent = "Create Account";
+                submitButton.disabled = false;
+            });
+    });
+}

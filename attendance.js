@@ -1,10 +1,9 @@
-// 1. IMPORTS
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 import { 
     getFirestore, collection, addDoc, deleteDoc, doc, onSnapshot, query, orderBy 
 } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
 
-// 2. CONFIG
+// 1. CONFIGURATION
 const firebaseConfig = {
     apiKey: "AIzaSyBzCn2-2Oz-z5ucnUGXsBThEmNMxEv4I_U",
     authDomain: "linkexesystembackend.firebaseapp.com",
@@ -31,9 +30,6 @@ const pillarColors = {
     'IGP': '#667eea'
 };
 
-// ==========================================
-// 3. LISTENERS
-// ==========================================
 const q = query(collection(db, "events"), orderBy("createdAt", "desc"));
 
 onSnapshot(q, (snapshot) => {
@@ -67,7 +63,7 @@ function listenToAttendees(eventId) {
         // Update UI
         renderAll();
 
-        // REAL-TIME UPDATE FOR MODAL:
+        // Real-time update for modal
         const listModal = document.getElementById('attendeeListModal');
         if (listModal.style.display === 'block' && currentEventId === eventId) {
             renderModalList(attendeesList, eventId);
@@ -76,9 +72,6 @@ function listenToAttendees(eventId) {
     });
 }
 
-// ==========================================
-// 4. RENDERING UI
-// ==========================================
 function formatDate(dateInput) {
     if (!dateInput) return '';
     return new Date(dateInput).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
@@ -154,28 +147,20 @@ function renderAll() {
     renderEventCards(currentFilter);
 }
 
-// ==========================================
-// 5. ATTENDEE LIST POPUP LOGIC
-// ==========================================
 window.openAttendeeListModal = function(eventId) {
     const event = localEvents.find(e => e.id === eventId);
     if (!event) return;
 
     currentEventId = eventId; 
 
-    // Update Header
     document.getElementById('modalEventTitle').innerText = `${event.name} - Attendees`;
     document.getElementById('attendeeCountDisplay').innerText = `${event.attendees ? event.attendees.length : 0} Attendees`;
 
-    // Setup Add Button
     document.getElementById('modalAddBtn').onclick = function() {
         openAddAttendeeModal(eventId);
     };
 
-    // Render List
     renderModalList(event.attendees, eventId);
-
-    // Show
     document.getElementById('attendeeListModal').style.display = 'block';
 }
 
@@ -210,9 +195,7 @@ window.closeAttendeeListModal = function() {
     document.getElementById('attendeeListModal').style.display = 'none';
 }
 
-// ==========================================
-// 6. CRUD ACTIONS
-// ==========================================
+// CRUD
 window.addEvent = async function(e) {
     e.preventDefault();
     const btn = document.querySelector('#addEventForm .submit-btn');
@@ -269,9 +252,6 @@ window.deleteAttendee = async function(eventId, attendeeId) {
     catch (error) { console.error(error); }
 }
 
-// ==========================================
-// 7. UTILS
-// ==========================================
 window.filterEvents = function(pillar) {
     currentFilter = pillar;
     document.querySelectorAll('.filter-btn').forEach(btn => {
